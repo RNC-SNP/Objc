@@ -11,14 +11,14 @@
 
 int main(int argc, const char* argv[]){
     @autoreleasepool {
-        
-        
-        // Use Block:
-        int (^SquareBlock)(int) = ^(int x){
-            int result = x * x;
+        // Use Block as function:
+        double one = 1;
+        double (^MultiplyBlock)(double, double) = ^(double x, double y){
+            double result = x * y * one;
             return result;
         };
-        NSLog(@"Result of SquareBlock(9): %d", SquareBlock(9));
+        one = 0;// This change won't effect the block defined above.
+        NSLog(@"Result of MultiplyBlock(1.2, 3.4): %f", MultiplyBlock(1.2, 3.4));
         
         
         // Use Associate:
@@ -44,11 +44,11 @@ int main(int argc, const char* argv[]){
         for (_key in dic) {
             NSLog(@"OS: %@, lang: %@", _key, [dic objectForKey:_key]);
         }
-        // Use 'for...in' expression with NSEnumerator:
-        NSEnumerator *enumerator = [array objectEnumerator];
-        for(NSString *str in enumerator) {
+        // Use 'for...in' expression with NSEnumerator(Just like Iterator in Java):
+        NSEnumerator *_enum= [array objectEnumerator];
+        for(NSString *str in _enum) {
             NSLog(@"Current: %@", str);
-            NSString *next = [enumerator nextObject];
+            NSString *next = [_enum nextObject];
             if(next != nil){
                 NSLog(@"Next: %@", next);
             }
