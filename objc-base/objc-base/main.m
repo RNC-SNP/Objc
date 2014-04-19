@@ -49,9 +49,18 @@ int main(int argc, const char* argv[]){
         for(NSString *str in _enum) {
             NSLog(@"Current: %@", str);
             NSString *next = [_enum nextObject];
-            if(next != nil){
+            // Use try/catch/finally/throw:
+            @try {
                 NSLog(@"Next: %@", next);
             }
+            @catch (NSException *exception) {
+                NSLog(@"%@[%@] occured: %@", [exception name], [exception description], [exception reason]);
+            }
+            @finally {
+                //TODO
+            }
+            NSException* ex = [NSException exceptionWithName: @"CustomException" reason: @"Unknown reason" userInfo: nil];
+            @throw ex;
         }
     }
     
