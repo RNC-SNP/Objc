@@ -12,6 +12,7 @@
 		8059EBEE190290AA007000F1 /* objc_class.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8059EBED190290AA007000F1 /* objc_class.1 */; };
 		8059EBF61902CE32007000F1 /* Parent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8059EBF51902CE32007000F1 /* Parent.m */; };
 		8059EBF91902CFF6007000F1 /* Child.m in Sources */ = {isa = PBXBuildFile; fileRef = 8059EBF81902CFF6007000F1 /* Child.m */; };
+		8059EBFC1902DDD4007000F1 /* Child+Cate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8059EBFB1902DDD4007000F1 /* Child+Cate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +38,8 @@
 		8059EBF51902CE32007000F1 /* Parent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Parent.m; sourceTree = "<group>"; };
 		8059EBF71902CFF6007000F1 /* Child.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Child.h; sourceTree = "<group>"; };
 		8059EBF81902CFF6007000F1 /* Child.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Child.m; sourceTree = "<group>"; };
+		8059EBFA1902DDD4007000F1 /* Child+Cate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Child+Cate.h"; sourceTree = "<group>"; };
+		8059EBFB1902DDD4007000F1 /* Child+Cate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Child+Cate.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,8 @@
 			children = (
 				8059EBF71902CFF6007000F1 /* Child.h */,
 				8059EBF81902CFF6007000F1 /* Child.m */,
+				8059EBFA1902DDD4007000F1 /* Child+Cate.h */,
+				8059EBFB1902DDD4007000F1 /* Child+Cate.m */,
 				8059EBE9190290AA007000F1 /* main.m */,
 				8059EBED190290AA007000F1 /* objc_class.1 */,
 				8059EBF41902CE32007000F1 /* Parent.h */,
@@ -152,6 +157,7 @@
 				8059EBF91902CFF6007000F1 /* Child.m in Sources */,
 				8059EBEA190290AA007000F1 /* main.m in Sources */,
 				8059EBF61902CE32007000F1 /* Parent.m in Sources */,
+				8059EBFC1902DDD4007000F1 /* Child+Cate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

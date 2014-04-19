@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Parent.h"
 #import "Child.h"
+#import "Child+Cate.h"
 
 int main(int argc, const char * argv[])
 {
@@ -16,6 +17,7 @@ int main(int argc, const char * argv[])
         Child *child = [[Child alloc] init];
         [child greeting];
         [child greeting: @"Rinc"];
+        [child greetingInCate: @"Rinc"];
     }
     return 0;
 }
