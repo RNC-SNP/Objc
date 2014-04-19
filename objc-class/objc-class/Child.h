@@ -16,5 +16,12 @@
 -(void) greeting;
 
 // Overload:
--(Boolean) greeting:(NSString*) name;
+-(Boolean) greeting: (NSString*) name;
+@end
+
+// Use Extension(anonymous category after interface)
+@interface Child() {
+    int k;
+}
+-(void) greetingInExtension: (NSString*) name;
 @end

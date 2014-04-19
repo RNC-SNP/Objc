@@ -18,6 +18,7 @@ int main(int argc, const char * argv[])
         [child greeting];
         [child greeting: @"Rinc"];
         [child greetingInCate: @"Rinc"];
+        [child greetingInExtension: @"Rinc"];
     }
     return 0;
 }

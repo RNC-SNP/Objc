@@ -21,4 +21,10 @@
     NSLog(@"Child says: 'Hello, %@.'", name);
     return YES;
 }
+
+// Implements method declared in Extension:
+-(void) greetingInExtension: (NSString*) name{
+    [self greeting];
+    NSLog(@"Extension says: 'Hello, %@.'", name);
+}
 @end
