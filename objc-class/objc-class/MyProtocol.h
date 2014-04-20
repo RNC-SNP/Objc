@@ -15,7 +15,7 @@
 @required
 -(void)printProtocolName;
 
-// Declare oprional method:
+// Declare optional method:
 @optional
 -(void)printAuthor;
 
