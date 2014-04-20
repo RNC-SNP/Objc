@@ -9,6 +9,26 @@
 #import "Parent.h"
 
 @implementation Parent
+
+// Notify the Compiler to generate setter and getter method if the implementation file dosn't define them:
+@synthesize _name;
+
+// Init method:
+-(id)initWithName: (NSString*) name{
+    if (self = [super init]) {
+        if(name) {
+            _name = [name copy];
+            return self;
+        } else {
+            // Cannot call release method in Automatic Reference Counting Mode:
+            //[self release];
+            return nil;
+        }
+    } else {
+        return nil;
+    }
+}
+
 -(void) greeting{
     NSLog(@"Parent says: 'Hello, World.'");
 }

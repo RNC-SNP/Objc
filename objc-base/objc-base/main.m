@@ -51,16 +51,19 @@ int main(int argc, const char* argv[]){
             NSString *next = [_enum nextObject];
             // Use try/catch/finally/throw:
             @try {
-                NSLog(@"Next: %@", next);
+                if(next) {
+                    NSLog(@"Next: %@", next);
+                } else {
+                    NSException* ex = [NSException exceptionWithName: @"NullPointerException" reason: @"Unknown reason" userInfo: nil];
+                    @throw ex;
+                }
             }
             @catch (NSException *exception) {
-                NSLog(@"%@[%@] occured: %@", [exception name], [exception description], [exception reason]);
+                NSLog(@"%@ occured: %@", [exception name], [exception reason]);
             }
             @finally {
                 //TODO
             }
-            NSException* ex = [NSException exceptionWithName: @"CustomException" reason: @"Unknown reason" userInfo: nil];
-            @throw ex;
         }
     }
     

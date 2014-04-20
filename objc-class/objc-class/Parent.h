@@ -9,8 +9,15 @@
 #import <Foundation/Foundation.h>
 
 @interface Parent : NSObject {
+    // Declare variable:
     int x;
 }
+
+// Declare property:
+@property (readwrite) NSString *_name;
+
+// Init method:
+-(id)initWithName: (NSString*) name;
 
 -(void) greeting;
 @end

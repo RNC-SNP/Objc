@@ -9,6 +9,7 @@
 #import "Parent.h"
 
 @interface Child : Parent{
+    // Declare variable:
     int y;
 }
 
@@ -19,7 +20,7 @@
 -(Boolean) greeting: (NSString*) name;
 @end
 
-// Use Extension(anonymous Category declared after interface)
+// Use Extension(anonymous Category declared after interface):
 @interface Child() {
     int k;
 }

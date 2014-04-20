@@ -14,11 +14,24 @@
 int main(int argc, const char * argv[])
 {
     @autoreleasepool {
-        Child *child = [[Child alloc] init];
+        Child *child = [[Child alloc] initWithName: @"Rinc"];
         [child greeting];
         [child greeting: @"Rinc"];
         [child greetingInCate: @"Rinc"];
         [child greetingInExtension: @"Rinc"];
+        
+        // Use isKindOfClass:
+        BOOL isKind = [child isKindOfClass:[Parent class]];
+        NSLog(@"Object child %@ a kind of class Parent", isKind ?  @"is" : @"is not");
+        // Use isMemberOfClass:
+        BOOL isMember = [child isMemberOfClass:[Parent class]];
+        NSLog(@"Object child %@ a member of class Parent", isMember ?  @"is" : @"is not");
+        // Use respondsToSelector:
+        BOOL isRespond = [child respondsToSelector: @selector(greeting:)];
+        NSLog(@"Object child %@ to selector 'greeting:'", isRespond ?  @"responds" : @"dosn't respond");
+        // Use conformsToProtocol:
+        BOOL isConform = [child conformsToProtocol: @protocol(NSCopying)];
+        NSLog(@"Object child %@ to protocol 'NSCopying'", isConform ?  @"comforms" : @"dosn't conform");
     }
     return 0;
 }
