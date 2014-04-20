@@ -40,6 +40,7 @@
 		8059EBF81902CFF6007000F1 /* Child.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Child.m; sourceTree = "<group>"; };
 		8059EBFA1902DDD4007000F1 /* Child+Cate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Child+Cate.h"; sourceTree = "<group>"; };
 		8059EBFB1902DDD4007000F1 /* Child+Cate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Child+Cate.m"; sourceTree = "<group>"; };
+		80BC6A9319041CFD00E03106 /* MyProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyProtocol.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +88,7 @@
 				8059EBFA1902DDD4007000F1 /* Child+Cate.h */,
 				8059EBFB1902DDD4007000F1 /* Child+Cate.m */,
 				8059EBE9190290AA007000F1 /* main.m */,
+				80BC6A9319041CFD00E03106 /* MyProtocol.h */,
 				8059EBED190290AA007000F1 /* objc_class.1 */,
 				8059EBF41902CE32007000F1 /* Parent.h */,
 				8059EBF51902CE32007000F1 /* Parent.m */,
@@ -271,6 +273,7 @@
 				8059EBF3190290AA007000F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

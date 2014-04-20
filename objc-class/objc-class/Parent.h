@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MyProtocol.h"
 
-@interface Parent : NSObject {
+// Declare Super Class and Protocol:
+@interface Parent : NSObject <MyProtocol> {
     // Declare variable:
     int x;
 }

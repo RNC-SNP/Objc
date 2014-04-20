@@ -19,6 +19,7 @@ int main(int argc, const char * argv[])
         [child greeting: @"Rinc"];
         [child greetingInCate: @"Rinc"];
         [child greetingInExtension: @"Rinc"];
+        [child printProtocolName];
         
         // Use isKindOfClass:
         BOOL isKind = [child isKindOfClass:[Parent class]];
@@ -30,8 +31,8 @@ int main(int argc, const char * argv[])
         BOOL isRespond = [child respondsToSelector: @selector(greeting:)];
         NSLog(@"Object child %@ to selector 'greeting:'", isRespond ?  @"responds" : @"dosn't respond");
         // Use conformsToProtocol:
-        BOOL isConform = [child conformsToProtocol: @protocol(NSCopying)];
-        NSLog(@"Object child %@ to protocol 'NSCopying'", isConform ?  @"comforms" : @"dosn't conform");
+        BOOL isConform = [child conformsToProtocol: @protocol(MyProtocol)];
+        NSLog(@"Object child %@ to protocol 'MyProtocol'", isConform ?  @"comforms" : @"dosn't conform");
     }
     return 0;
 }

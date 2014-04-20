@@ -29,6 +29,12 @@
     }
 }
 
+// Implements method in Protocol:
+-(void)printProtocolName {
+    Protocol *protocol = @protocol(MyProtocol);
+    NSLog(@"Protocol name: %@", protocol);
+}
+
 -(void) greeting{
     NSLog(@"Parent says: 'Hello, World.'");
 }

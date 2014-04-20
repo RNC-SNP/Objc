@@ -20,7 +20,7 @@
 -(Boolean) greeting: (NSString*) name;
 @end
 
-// Use Extension(anonymous Category declared after interface):
+// Use Extension(anonymous Category):
 @interface Child() {
     int k;
 }

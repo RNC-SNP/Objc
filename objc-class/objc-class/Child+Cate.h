@@ -9,8 +9,10 @@
 #import "Child.h"
 
 // Use Category:
-@interface Child (Cate){
+@interface Child (Cate) {
     // Cannot declare variable in Category
 }
+
 -(NSString*) greetingInCate: (NSString*) name;
+
 @end

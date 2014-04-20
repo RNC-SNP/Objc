@@ -10,6 +10,7 @@
 
 // Use Category:
 @implementation Child (Cate)
+
 -(NSString*) greetingInCate:(NSString *)name{
     [self greeting: name];
     NSLog(@"Category says: 'Hello, %@.'", name);
