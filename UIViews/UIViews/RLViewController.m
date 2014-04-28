@@ -23,7 +23,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    // Setup Label:
+    [_labelUser setText: @"UIView Usage..."];
+    [_labelUser setTextColor:[UIColor orangeColor]];
+    [_labelUser setFont:[UIFont boldSystemFontOfSize:15]];
+    [_labelUser setTextAlignment: NSTextAlignmentCenter];
+    [_labelUser adjustsFontSizeToFitWidth];
+    [_labelUser setNumberOfLines: 1];
+    [_labelUser setHighlighted:YES];
+    [_labelUser setHighlightedTextColor:[UIColor greenColor]];
+    [_labelUser setShadowColor:[UIColor brownColor]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,14 +50,21 @@
     }else{
         self.labelUser.text=@"Please type your name below...";
     }
+    [self hideKeyboard:_textfieldUser];
 }
 
-// UIKit框架定义的方法，当用户按下键盘返回按钮时调用
+// Called when the Return button of keyboard is clicked.
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField{
-    if(theTextField==self.textfieldUser){
-        // 发送消息，强制textfield失去FirstResponder，进而隐藏键盘
-        [theTextField resignFirstResponder];
+    if(theTextField == self.textfieldUser){
+        [self hideKeyboard:theTextField];
     }
     return YES;
+}
+
+
+- (void) hideKeyboard: (UITextField *)theTextField{
+    // Let the textfield give up first responder to hide keyboard.
+    // Just like 'setFocusableInTouchMode(false)' in Android.
+    [theTextField resignFirstResponder];
 }
 @end

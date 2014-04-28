@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>D4C6A1FE-4846-4EC0-890F-F7E7E7204AB8</string>
+	<string>E17FFDB3-2B39-40DE-8741-1B8797581086</string>
 	<key>IDESourceControlProjectName</key>
-	<string>HelloWorld</string>
+	<string>UIViews</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>F6941C28-91AF-4132-84A8-90EECFBFCD8E</key>
 		<string>https://bitbucket.org/RincLiu/ios-demo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>HelloWorld/HelloWorld.xcodeproj/project.xcworkspace</string>
+	<string>UIViews/UIViews.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>F6941C28-91AF-4132-84A8-90EECFBFCD8E</key>
