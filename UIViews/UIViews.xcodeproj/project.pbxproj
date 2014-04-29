@@ -22,6 +22,7 @@
 		801109CD190EBA270027C4B7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 801109AC190EBA270027C4B7 /* UIKit.framework */; };
 		801109D5190EBA270027C4B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 801109D3190EBA270027C4B7 /* InfoPlist.strings */; };
 		801109D7190EBA270027C4B7 /* UIViewsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 801109D6190EBA270027C4B7 /* UIViewsTests.m */; };
+		807D0E7C190FEA3700110ABF /* avatar1.png in Resources */ = {isa = PBXBuildFile; fileRef = 807D0E7B190FEA3700110ABF /* avatar1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		801109D2190EBA270027C4B7 /* UIViewsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UIViewsTests-Info.plist"; sourceTree = "<group>"; };
 		801109D4190EBA270027C4B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		801109D6190EBA270027C4B7 /* UIViewsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewsTests.m; sourceTree = "<group>"; };
+		807D0E7B190FEA3700110ABF /* avatar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar1.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				801109C0190EBA270027C4B7 /* RLViewController.h */,
 				801109C1190EBA270027C4B7 /* RLViewController.m */,
 				801109C3190EBA270027C4B7 /* Images.xcassets */,
+				807D0E7B190FEA3700110ABF /* avatar1.png */,
 				801109AF190EBA270027C4B7 /* Supporting Files */,
 			);
 			path = UIViews;
@@ -236,6 +239,7 @@
 				801109C4190EBA270027C4B7 /* Images.xcassets in Resources */,
 				801109BC190EBA270027C4B7 /* Main_iPhone.storyboard in Resources */,
 				801109B3190EBA270027C4B7 /* InfoPlist.strings in Resources */,
+				807D0E7C190FEA3700110ABF /* avatar1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +475,7 @@
 				801109DC190EBA270027C4B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		801109DD190EBA270027C4B7 /* Build configuration list for PBXNativeTarget "UIViewsTests" */ = {
 			isa = XCConfigurationList;
@@ -479,6 +484,7 @@
 				801109DF190EBA270027C4B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

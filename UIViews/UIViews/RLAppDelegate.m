@@ -12,10 +12,107 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [self createCustomView];
     return YES;
 }
-							
+
+
+// Create custom view with code:
+- (void)createCustomView
+{
+    // Get screen frame:
+    CGRect screenFrame = [[UIScreen mainScreen] bounds];
+    
+    // Init window:
+    self.window = [[UIWindow alloc] initWithFrame:screenFrame];
+    self.window.backgroundColor = [UIColor greenColor];
+    
+    // Init ViewController and rootview:
+    UIViewController *controller = [[UIViewController alloc] init];
+    self.window.rootViewController = controller;
+    UIView *rootView = [[UIView alloc]initWithFrame:screenFrame];
+    controller.view = rootView;
+    
+    // Add NavigationBar:
+    UINavigationBar *navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 20, screenFrame.size.width, 45)];
+    [navBar setBarStyle:UIBarStyleDefault];
+    [navBar setBackgroundColor:[UIColor blueColor]];
+    UINavigationItem *navItem = [[UINavigationItem alloc]initWithTitle:@"UIViews' Usage"];
+    UIBarButtonItem *bbItemBack = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(onClickBackNavButton:)];
+    [navItem setLeftBarButtonItem:bbItemBack];
+    UIBarButtonItem *bbItemSubmit = [[UIBarButtonItem alloc] initWithTitle:@"Submit" style:UIBarButtonItemStyleDone target:self action:@selector(onClickSubmitNavButton:)];
+    [navItem setRightBarButtonItem:bbItemSubmit];
+    [navBar pushNavigationItem:navItem animated:YES];
+    [rootView addSubview:navBar];
+    
+    // Add a button:
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [btn setFrame:CGRectMake(10, 70, 80, 20)];
+    [btn setTitle:@"Click Me!" forState:UIControlStateNormal];
+    [btn setBackgroundColor:[UIColor whiteColor]];
+    [rootView addSubview:btn];
+    
+    // Bind Touch Events Handler Methods to Button:
+    [btn addTarget:self action:@selector(onTouchDown:) forControlEvents:UIControlEventTouchDown];
+    [btn addTarget:self action:@selector(onTouchUp:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // Add an ImageView:
+    UIImageView *iv=[[UIImageView alloc]initWithFrame:CGRectMake(100, 70, 30, 40)];
+    [iv setImage:[UIImage imageNamed:@"avatar1.png"]];
+    [rootView addSubview:iv];
+    
+    // Add a ProgressView:
+    UIProgressView *pv = [[UIProgressView alloc] initWithFrame:CGRectMake(10, 100, 80, 20)];
+    [pv setProgressViewStyle:UIProgressViewStyleDefault];
+    [pv setProgress:0.123456789];
+    [rootView addSubview:pv];
+    
+    // Add an ActivityIndicatorView:
+    UIActivityIndicatorView *aiv = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(140, 70, 40, 40)];
+    [aiv setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [aiv startAnimating];
+    [rootView addSubview:aiv];
+    
+    // Add TabBar:
+    UITabBar *tabBar = [[UITabBar alloc] initWithFrame:CGRectMake(0, screenFrame.size.height-48, screenFrame.size.width, 48)];
+    [tabBar setBarStyle:UIBarStyleDefault];
+    [tabBar setBackgroundColor:[UIColor blueColor]];
+    [tabBar setDelegate:self];
+    [tabBar setUserInteractionEnabled:YES];
+    NSMutableArray *tabItemArray = [NSMutableArray array];
+    [tabItemArray addObject:[[UITabBarItem alloc] initWithTitle:@"Tab0" image:nil tag:0]];
+    [tabItemArray addObject:[[UITabBarItem alloc] initWithTitle:@"Tab1" image:nil tag:1]];
+    [tabItemArray addObject:[[UITabBarItem alloc] initWithTitle:@"Tab2" image:nil tag:2]];
+    [tabBar setItems:tabItemArray];
+    [tabBar setSelectedItem:[tabItemArray objectAtIndex:0]];
+    [rootView addSubview:tabBar];
+    
+    // Travel subViews:
+    for(UIView *view in [rootView subviews]){
+        NSLog(@"SubView: %@", view.description);
+    }
+    
+    // Show window:
+    [self.window makeKeyAndVisible];
+}
+
+// Touch Events Handler Methods:
+- (IBAction)onTouchDown:(id)sender {
+    NSLog(@"Touch down!");
+}
+
+- (IBAction)onTouchUp:(id)sender {
+    NSLog(@"Touch up!");
+}
+
+- (IBAction)onClickBackNavButton:(id)sender {
+    NSLog(@"Back Navigation Button was clicked!");
+}
+
+- (IBAction)onClickSubmitNavButton:(id)sender {
+    NSLog(@"Submit Navigation Button was clicked!");
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

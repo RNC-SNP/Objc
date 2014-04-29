@@ -14,6 +14,8 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *textfieldUser;
 
+@property (weak, nonatomic) IBOutlet UIImageView *iv;
+
 - (IBAction)sayHello:(id)sender;
 
 @end
@@ -24,16 +26,20 @@
 {
     [super viewDidLoad];
     
-    // Setup Label:
+    // Setup UILabel:
     [_labelUser setText: @"UIView Usage..."];
     [_labelUser setTextColor:[UIColor orangeColor]];
-    [_labelUser setFont:[UIFont boldSystemFontOfSize:15]];
+    [_labelUser setFont:[UIFont boldSystemFontOfSize:12]];
     [_labelUser setTextAlignment: NSTextAlignmentCenter];
     [_labelUser adjustsFontSizeToFitWidth];
     [_labelUser setNumberOfLines: 1];
     [_labelUser setHighlighted:YES];
     [_labelUser setHighlightedTextColor:[UIColor greenColor]];
     [_labelUser setShadowColor:[UIColor brownColor]];
+    
+    // Setup UIImageView:
+    NSURL *url = [NSURL URLWithString:@"http://www.gravatar.com/avatar/5e9ae16f24dfb6fbdf494e8c3c9d6973"];
+    [_iv setImage:[[UIImage alloc]initWithData:[NSData dataWithContentsOfURL:url]]];
 }
 
 - (void)didReceiveMemoryWarning
