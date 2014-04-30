@@ -23,17 +23,17 @@
     // Get screen frame:
     CGRect screenFrame = [[UIScreen mainScreen] bounds];
     
-    // Init window:
+    // Init UIWindow:
     self.window = [[UIWindow alloc] initWithFrame:screenFrame];
     self.window.backgroundColor = [UIColor greenColor];
     
-    // Init ViewController and rootview:
+    // Init UIViewController and rootview:
     UIViewController *controller = [[UIViewController alloc] init];
     self.window.rootViewController = controller;
     UIView *rootView = [[UIView alloc]initWithFrame:screenFrame];
     controller.view = rootView;
     
-    // Add NavigationBar:
+    // Use UINavigationBar:
     UINavigationBar *navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 20, screenFrame.size.width, 45)];
     [navBar setBarStyle:UIBarStyleDefault];
     [navBar setBackgroundColor:[UIColor blueColor]];
@@ -45,35 +45,40 @@
     [navBar pushNavigationItem:navItem animated:YES];
     [rootView addSubview:navBar];
     
-    // Add a button:
+    // Use UIButton:
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [btn setFrame:CGRectMake(10, 70, 80, 20)];
     [btn setTitle:@"Click Me!" forState:UIControlStateNormal];
     [btn setBackgroundColor:[UIColor whiteColor]];
     [rootView addSubview:btn];
     
-    // Bind Touch Events Handler Methods to Button:
+    // Bind Touch Events Handler Methods to UIButton:
     [btn addTarget:self action:@selector(onTouchDown:) forControlEvents:UIControlEventTouchDown];
     [btn addTarget:self action:@selector(onTouchUp:) forControlEvents:UIControlEventTouchUpInside];
     
-    // Add an ImageView:
+    // Use UIImageView:
     UIImageView *iv=[[UIImageView alloc]initWithFrame:CGRectMake(100, 70, 30, 40)];
     [iv setImage:[UIImage imageNamed:@"avatar1.png"]];
     [rootView addSubview:iv];
     
-    // Add a ProgressView:
+    // Use UIProgressView:
     UIProgressView *pv = [[UIProgressView alloc] initWithFrame:CGRectMake(10, 100, 80, 20)];
     [pv setProgressViewStyle:UIProgressViewStyleDefault];
     [pv setProgress:0.123456789];
     [rootView addSubview:pv];
     
-    // Add an ActivityIndicatorView:
+    // Use UIActivityIndicatorView:
     UIActivityIndicatorView *aiv = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(140, 70, 40, 40)];
     [aiv setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [aiv startAnimating];
     [rootView addSubview:aiv];
     
-    // Add TabBar:
+    // Use UIWebView:
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 120, screenFrame.size.width, 300)];
+    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://RincLiu.com"]]];
+    [rootView addSubview:webView];
+    
+    // Use UITabBar:
     UITabBar *tabBar = [[UITabBar alloc] initWithFrame:CGRectMake(0, screenFrame.size.height-48, screenFrame.size.width, 48)];
     [tabBar setBarStyle:UIBarStyleDefault];
     [tabBar setBackgroundColor:[UIColor blueColor]];
@@ -92,25 +97,59 @@
         NSLog(@"SubView: %@", view.description);
     }
     
-    // Show window:
+    // Show UIVindow:
     [self.window makeKeyAndVisible];
+}
+
+// Methods in UIAlertViewDelegate Protocol:
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    NSLog(@"clickedButtonAtIndex: %d", buttonIndex);
+}
+
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    NSLog(@"didDismissButtonAtIndex: %d", buttonIndex);
+}
+
+-(void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex{
+    NSLog(@"willDissmissButtonAtIndex: %d", buttonIndex);
+}
+
+// Methods in UIActionSheetDelegate Protocol:
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    NSLog(@"clickedButtonAtIndex: %d", buttonIndex);
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    NSLog(@"didDissmissButtonAtIndex: %d", buttonIndex);
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex{
+    NSLog(@"willDissmissButtonAtIndex: %d", buttonIndex);
 }
 
 // Touch Events Handler Methods:
 - (IBAction)onTouchDown:(id)sender {
-    NSLog(@"Touch down!");
+    // Use UIActionSheet:
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"You clicked!" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Yes, I'm sure." otherButtonTitles:@"AAAA",@"BBBB",@"CCCC", nil];
+    [actionSheet showInView:_window];
 }
 
 - (IBAction)onTouchUp:(id)sender {
-    NSLog(@"Touch up!");
+    [self showMessage:@"Touch up!"];
 }
 
 - (IBAction)onClickBackNavButton:(id)sender {
-    NSLog(@"Back Navigation Button was clicked!");
+    [self showMessage:@"Back Navigation Button was clicked!"];
 }
 
 - (IBAction)onClickSubmitNavButton:(id)sender {
-    NSLog(@"Submit Navigation Button was clicked!");
+    [self showMessage:@"Submit Navigation Button was clicked!"];
+}
+
+// Use UIAlertView to show Message:
+-(void)showMessage:(NSString *)msg{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oh..." message:msg delegate:self cancelButtonTitle:@"Calcel" otherButtonTitles:@"AAAA",@"BBBB",@"CCCC", nil];
+    [alertView show];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
