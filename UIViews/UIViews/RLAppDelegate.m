@@ -34,7 +34,7 @@
     controller.view = rootView;
     
     // Use UINavigationBar:
-    UINavigationBar *navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 20, screenFrame.size.width, 45)];
+    UINavigationBar *navBar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 20, screenFrame.size.width, 48)];
     [navBar setBarStyle:UIBarStyleDefault];
     [navBar setBackgroundColor:[UIColor blueColor]];
     UINavigationItem *navItem = [[UINavigationItem alloc]initWithTitle:@"UIViews' Usage"];
@@ -45,38 +45,19 @@
     [navBar pushNavigationItem:navItem animated:YES];
     [rootView addSubview:navBar];
     
-    // Use UIButton:
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [btn setFrame:CGRectMake(10, 70, 80, 20)];
-    [btn setTitle:@"Click Me!" forState:UIControlStateNormal];
-    [btn setBackgroundColor:[UIColor whiteColor]];
-    [rootView addSubview:btn];
+    // Use UIToolBar:
+    UIToolbar *toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 70, screenFrame.size.width, 33)];
+    NSMutableArray *toolbarItemArray = [[NSMutableArray alloc] init];
+    UIBarButtonItem *barButtonItem0 = [[UIBarButtonItem alloc]initWithTitle:@"BarButton0" style:UIBarButtonItemStylePlain target:self action:@selector(onClickBarButton0:)];
+    UIBarButtonItem *barButtonItem1 = [[UIBarButtonItem alloc]initWithTitle:@"BarButton1" style:UIBarButtonItemStylePlain target:self action:@selector(onClickBarButton1:)];
+    UIBarButtonItem *barButtonItem2 = [[UIBarButtonItem alloc]initWithTitle:@"BarButton2" style:UIBarButtonItemStylePlain target:self action:@selector(onClickBarButton2:)];
+    [toolbarItemArray addObject:barButtonItem0];
+    [toolbarItemArray addObject:barButtonItem1];
+    [toolbarItemArray addObject:barButtonItem2];
+    [toolbar setItems:toolbarItemArray];
+    [rootView addSubview:toolbar];
     
-    // Bind Touch Events Handler Methods to UIButton:
-    [btn addTarget:self action:@selector(onTouchDown:) forControlEvents:UIControlEventTouchDown];
-    [btn addTarget:self action:@selector(onTouchUp:) forControlEvents:UIControlEventTouchUpInside];
-    
-    // Use UIImageView:
-    UIImageView *iv=[[UIImageView alloc]initWithFrame:CGRectMake(100, 70, 30, 40)];
-    [iv setImage:[UIImage imageNamed:@"avatar1.png"]];
-    [rootView addSubview:iv];
-    
-    // Use UIProgressView:
-    UIProgressView *pv = [[UIProgressView alloc] initWithFrame:CGRectMake(10, 100, 80, 20)];
-    [pv setProgressViewStyle:UIProgressViewStyleDefault];
-    [pv setProgress:0.123456789];
-    [rootView addSubview:pv];
-    
-    // Use UIActivityIndicatorView:
-    UIActivityIndicatorView *aiv = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(140, 70, 40, 40)];
-    [aiv setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [aiv startAnimating];
-    [rootView addSubview:aiv];
-    
-    // Use UIWebView:
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 120, screenFrame.size.width, 300)];
-    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://RincLiu.com"]]];
-    [rootView addSubview:webView];
+    [self addCommonViewsInRootView:rootView];
     
     // Use UITabBar:
     UITabBar *tabBar = [[UITabBar alloc] initWithFrame:CGRectMake(0, screenFrame.size.height-48, screenFrame.size.width, 48)];
@@ -101,17 +82,72 @@
     [self.window makeKeyAndVisible];
 }
 
+-(void)addCommonViewsInRootView:(UIView *)rootView{
+    CGRect screenFrame = [[UIScreen mainScreen] bounds];
+    
+    // Use UIButton:
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [btn setFrame:CGRectMake(5, 108, 60, 20)];
+    [btn setTitle:@"Click!" forState:UIControlStateNormal];
+    [btn setBackgroundColor:[UIColor whiteColor]];
+    [rootView addSubview:btn];
+    [btn addTarget:self action:@selector(onTouchUp:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // Use UIImageView:
+    UIImageView *iv=[[UIImageView alloc]initWithFrame:CGRectMake(70, 108, 30, 40)];
+    [iv setImage:[UIImage imageNamed:@"avatar1.png"]];
+    [rootView addSubview:iv];
+    
+    // Use UIProgressView:
+    UIProgressView *pv = [[UIProgressView alloc] initWithFrame:CGRectMake(5, 133, 60, 20)];
+    [pv setProgressViewStyle:UIProgressViewStyleDefault];
+    [pv setProgress:0.123456789];
+    [rootView addSubview:pv];
+    
+    // Use UIActivityIndicatorView:
+    UIActivityIndicatorView *aiv = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(105, 103, 40, 40)];
+    [aiv setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [aiv startAnimating];
+    [rootView addSubview:aiv];
+    
+    // Use UISwitch:
+    UISwitch *swtch = [[UISwitch alloc]initWithFrame:CGRectMake(150, 111, 50, 25)];
+    [swtch setOn:YES animated:YES];
+    [swtch addTarget:self action:@selector(onSwitch:) forControlEvents:UIControlEventValueChanged];
+    [rootView addSubview:swtch];
+    
+    // Use UISlider:
+    UISlider *slider = [[UISlider alloc]initWithFrame:CGRectMake(205, 120, screenFrame.size.width-210, 20)];
+    slider.minimumValue = 0;
+    slider.maximumValue = 100;
+    slider.value = 1.23456789;
+    slider.continuous = YES;
+    [slider addTarget:self action:@selector(onSlide:) forControlEvents:UIControlEventValueChanged];
+    [rootView addSubview:slider];
+    
+    // Use UIPageControl:
+    UIPageControl *pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, 158, screenFrame.size.width, 50)];
+    [pageControl setNumberOfPages:3];
+    [pageControl setCurrentPage:0];
+    [pageControl setHidesForSinglePage:NO];
+    [pageControl setDefersCurrentPageDisplay:YES];
+    [pageControl addTarget:self action:@selector(changePage:) forControlEvents:UIControlEventValueChanged];
+    [rootView addSubview:pageControl];
+    
+    // Use UIWebView:
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 208, screenFrame.size.width, screenFrame.size.height-220)];
+    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://RincLiu.com"]]];
+    [rootView addSubview:webView];
+}
+
+// Methods in UITabBarDelegate Protocol:
+-(void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
+    NSLog(@"You selected Item: %@", item.title);
+}
+
 // Methods in UIAlertViewDelegate Protocol:
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     NSLog(@"clickedButtonAtIndex: %d", buttonIndex);
-}
-
--(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
-    NSLog(@"didDismissButtonAtIndex: %d", buttonIndex);
-}
-
--(void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex{
-    NSLog(@"willDissmissButtonAtIndex: %d", buttonIndex);
 }
 
 // Methods in UIActionSheetDelegate Protocol:
@@ -119,23 +155,11 @@
     NSLog(@"clickedButtonAtIndex: %d", buttonIndex);
 }
 
--(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
-    NSLog(@"didDissmissButtonAtIndex: %d", buttonIndex);
-}
-
--(void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex{
-    NSLog(@"willDissmissButtonAtIndex: %d", buttonIndex);
-}
-
-// Touch Events Handler Methods:
-- (IBAction)onTouchDown:(id)sender {
+// Events Handler Methods:
+- (IBAction)onTouchUp:(id)sender {
     // Use UIActionSheet:
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"You clicked!" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Yes, I'm sure." otherButtonTitles:@"AAAA",@"BBBB",@"CCCC", nil];
     [actionSheet showInView:_window];
-}
-
-- (IBAction)onTouchUp:(id)sender {
-    [self showMessage:@"Touch up!"];
 }
 
 - (IBAction)onClickBackNavButton:(id)sender {
@@ -144,6 +168,33 @@
 
 - (IBAction)onClickSubmitNavButton:(id)sender {
     [self showMessage:@"Submit Navigation Button was clicked!"];
+}
+
+- (IBAction)onClickBarButton0:(id)sender {
+    [self showMessage:@"BarButton0 was clicked!"];
+}
+
+- (IBAction)onClickBarButton1:(id)sender {
+    [self showMessage:@"BarButton1 was clicked!"];
+}
+
+- (IBAction)onClickBarButton2:(id)sender {
+    [self showMessage:@"BarButton2 was clicked!"];
+}
+
+- (IBAction)onSwitch:(id)sender {
+    UISwitch *swtch = (UISwitch*)sender;
+    [self showMessage:[[NSString alloc]initWithFormat:@"Switch state: %@", swtch.isOn ? @"ON" : @"OFF"]];
+}
+
+- (IBAction)onSlide:(id)sender {
+    UISlider *slider = (UISlider*)sender;
+    [self showMessage:[[NSString alloc]initWithFormat:@"Slider value: %f", slider.value]];
+}
+
+- (IBAction)changePage:(id)sender {
+    UIPageControl *pageControl = (UIPageControl*)sender;
+    [self showMessage:[[NSString alloc]initWithFormat:@"Current page: %d", pageControl.currentPage]];
 }
 
 // Use UIAlertView to show Message:
