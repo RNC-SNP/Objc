@@ -94,8 +94,10 @@
     [btn addTarget:self action:@selector(onTouchUp:) forControlEvents:UIControlEventTouchUpInside];
     
     // Use UIImageView:
-    UIImageView *iv=[[UIImageView alloc]initWithFrame:CGRectMake(70, 108, 30, 40)];
-    [iv setImage:[UIImage imageNamed:@"avatar1.png"]];
+    UIImageView *iv=[[UIImageView alloc]initWithFrame:CGRectMake(70, 108, 30, 30)];
+    //[iv setImage:[UIImage imageNamed:@"avatar1.png"]];
+    NSURL *url = [NSURL URLWithString:@"http://www.gravatar.com/avatar/5e9ae16f24dfb6fbdf494e8c3c9d6973"];
+    [iv setImage:[[UIImage alloc]initWithData:[NSData dataWithContentsOfURL:url]]];
     [rootView addSubview:iv];
     
     // Use UIProgressView:
@@ -126,7 +128,7 @@
     [rootView addSubview:slider];
     
     // Use UIPageControl:
-    UIPageControl *pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, 158, screenFrame.size.width, 50)];
+    UIPageControl *pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, 158, screenFrame.size.width/2, 50)];
     [pageControl setNumberOfPages:3];
     [pageControl setCurrentPage:0];
     [pageControl setHidesForSinglePage:NO];
@@ -134,8 +136,17 @@
     [pageControl addTarget:self action:@selector(changePage:) forControlEvents:UIControlEventValueChanged];
     [rootView addSubview:pageControl];
     
+    // Use UIPickerView:
+    UIPickerView *pickerView = [[UIPickerView alloc]initWithFrame:CGRectMake(screenFrame.size.width/2, 158, screenFrame.size.width/2, 400)];
+    [pickerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+    [pickerView setShowsSelectionIndicator:YES];
+    _pickerArray = [[NSArray alloc]initWithObjects:@"AAAA", @"BBBB", @"CCCC", @"DDDD", nil];
+    [pickerView setDelegate:self];
+    [pickerView setDataSource:self];
+    [rootView addSubview:pickerView];
+    
     // Use UIWebView:
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 208, screenFrame.size.width, screenFrame.size.height-220)];
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 213, screenFrame.size.width/2, screenFrame.size.height-200)];
     [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://RincLiu.com"]]];
     [rootView addSubview:webView];
 }
@@ -153,6 +164,24 @@
 // Methods in UIActionSheetDelegate Protocol:
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     NSLog(@"clickedButtonAtIndex: %d", buttonIndex);
+}
+
+// Methods in UIPickerViewDataSource Protocol:
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
+}
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    return [_pickerArray count];
+}
+
+// Methods in UIPickerDelegate Protocol:
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    return [_pickerArray objectAtIndex:row];
+}
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    [self showMessage:[NSString stringWithFormat:@"You selected: %@", [_pickerArray objectAtIndex:row]]];
 }
 
 // Events Handler Methods:
