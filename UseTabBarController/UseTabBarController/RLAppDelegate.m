@@ -1,32 +1,18 @@
 //
 //  RLAppDelegate.m
-//  UseUINavagationController
+//  UseTabBarController
 //
 //  Created by RincLiu on 5/2/14.
 //  Copyright (c) 2014 Rinc Liu. All rights reserved.
 //
 
 #import "RLAppDelegate.h"
-#import "RLViewControllerA.h"
-#import "RLViewControllerC.h"
 
 @implementation RLAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Init NavigationController:
-    RLViewControllerA *viewControllerA = [[RLViewControllerA alloc]init];
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:viewControllerA];
-    
-    // Init TabBarController:
-    RLViewControllerC *viewControllerC = [[RLViewControllerC alloc]init];
-    UITabBarController *tabBarController = [[UITabBarController alloc]init];
-    [tabBarController setViewControllers:[NSArray arrayWithObjects:navController,viewControllerC, nil]];
-    
-    // Set RootViewController and show Window:
-    _window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
-    [_window setRootViewController:tabBarController];
-    [_window makeKeyAndVisible];
+    // Override point for customization after application launch.
     return YES;
 }
 							

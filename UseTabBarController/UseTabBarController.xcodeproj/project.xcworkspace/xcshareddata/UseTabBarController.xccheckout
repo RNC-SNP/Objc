@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>0436A3F5-2F08-43D0-A73B-9DBAC5D56F4F</string>
+	<string>B83E79F2-FA56-4166-8C45-F427B076AAAC</string>
 	<key>IDESourceControlProjectName</key>
-	<string>UseUINavagationController</string>
+	<string>UseTabBarController</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>F6941C28-91AF-4132-84A8-90EECFBFCD8E</key>
 		<string>https://bitbucket.org/RincLiu/ios-demo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>UseUINavagationController/UseUINavagationController.xcodeproj/project.xcworkspace</string>
+	<string>UseTabBarController/UseTabBarController.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>F6941C28-91AF-4132-84A8-90EECFBFCD8E</key>

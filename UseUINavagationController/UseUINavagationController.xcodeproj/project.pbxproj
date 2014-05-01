@@ -23,6 +23,7 @@
 		800BF1301912ACC400E4D4F2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 800BF12E1912ACC400E4D4F2 /* InfoPlist.strings */; };
 		800BF1321912ACC400E4D4F2 /* UseUINavagationControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 800BF1311912ACC400E4D4F2 /* UseUINavagationControllerTests.m */; };
 		800BF13D1912B40500E4D4F2 /* RLViewControllerB.m in Sources */ = {isa = PBXBuildFile; fileRef = 800BF13C1912B40500E4D4F2 /* RLViewControllerB.m */; };
+		800BF1841912BB6600E4D4F2 /* RLViewControllerC.m in Sources */ = {isa = PBXBuildFile; fileRef = 800BF1831912BB6600E4D4F2 /* RLViewControllerC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		800BF1311912ACC400E4D4F2 /* UseUINavagationControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UseUINavagationControllerTests.m; sourceTree = "<group>"; };
 		800BF13B1912B40500E4D4F2 /* RLViewControllerB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RLViewControllerB.h; sourceTree = "<group>"; };
 		800BF13C1912B40500E4D4F2 /* RLViewControllerB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RLViewControllerB.m; sourceTree = "<group>"; };
+		800BF1821912BB6600E4D4F2 /* RLViewControllerC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RLViewControllerC.h; sourceTree = "<group>"; };
+		800BF1831912BB6600E4D4F2 /* RLViewControllerC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RLViewControllerC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +129,8 @@
 				800BF11C1912ACC400E4D4F2 /* RLViewControllerA.m */,
 				800BF13B1912B40500E4D4F2 /* RLViewControllerB.h */,
 				800BF13C1912B40500E4D4F2 /* RLViewControllerB.m */,
+				800BF1821912BB6600E4D4F2 /* RLViewControllerC.h */,
+				800BF1831912BB6600E4D4F2 /* RLViewControllerC.m */,
 				800BF10A1912ACC400E4D4F2 /* Supporting Files */,
 			);
 			path = UseUINavagationController;
@@ -263,6 +268,7 @@
 				800BF1101912ACC400E4D4F2 /* main.m in Sources */,
 				800BF13D1912B40500E4D4F2 /* RLViewControllerB.m in Sources */,
 				800BF11D1912ACC400E4D4F2 /* RLViewControllerA.m in Sources */,
+				800BF1841912BB6600E4D4F2 /* RLViewControllerC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,6 +483,7 @@
 				800BF1371912ACC400E4D4F2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		800BF1381912ACC400E4D4F2 /* Build configuration list for PBXNativeTarget "UseUINavagationControllerTests" */ = {
 			isa = XCConfigurationList;
@@ -485,6 +492,7 @@
 				800BF13A1912ACC400E4D4F2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
