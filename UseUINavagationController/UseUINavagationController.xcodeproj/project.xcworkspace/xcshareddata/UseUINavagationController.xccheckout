@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>56C081B0-427C-40A2-A8DC-75593D0FF2BF</string>
+	<string>3ABC638E-9BA5-43CD-B56B-76927774A943</string>
 	<key>IDESourceControlProjectName</key>
-	<string>UIViews</string>
+	<string>UseUINavagationController</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>F6941C28-91AF-4132-84A8-90EECFBFCD8E</key>
 		<string>https://bitbucket.org/RincLiu/ios-demo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>UIViews/UIViews.xcodeproj/project.xcworkspace</string>
+	<string>UseUINavagationController/UseUINavagationController.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>F6941C28-91AF-4132-84A8-90EECFBFCD8E</key>
