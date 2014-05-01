@@ -140,7 +140,7 @@
     UIPickerView *pickerView = [[UIPickerView alloc]initWithFrame:CGRectMake(screenFrame.size.width/2, 158, screenFrame.size.width/2, 400)];
     [pickerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
     [pickerView setShowsSelectionIndicator:YES];
-    _pickerArray = [[NSArray alloc]initWithObjects:@"AAAA", @"BBBB", @"CCCC", @"DDDD", nil];
+    _pickerArray = [[NSArray alloc] initWithObjects:@"Android", @"iOS", @"WindowsPhone", @"WindowsMobile", @"BlackBerry", @"Symbian", @"MeeGo", nil];
     [pickerView setDelegate:self];
     [pickerView setDataSource:self];
     [rootView addSubview:pickerView];
@@ -175,10 +175,11 @@
     return [_pickerArray count];
 }
 
-// Methods in UIPickerDelegate Protocol:
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     return [_pickerArray objectAtIndex:row];
 }
+
+// Methods in UIPickerDelegate Protocol:
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     [self showMessage:[NSString stringWithFormat:@"You selected: %@", [_pickerArray objectAtIndex:row]]];

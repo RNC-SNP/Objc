@@ -26,9 +26,9 @@
 // Methods in UIPickerViewDataSource Protocol:
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView;
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component;
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component;
 
 // Methods in UIPickerDelegate Protocol:
--(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component;
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component;
 
 @end
