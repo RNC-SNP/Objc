@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RLAppDelegate : UIResponder <UIApplicationDelegate, UITabBarDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface RLAppDelegate : UIResponder <UIApplicationDelegate, UITabBarDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UISearchBarDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
@@ -30,5 +30,10 @@
 
 // Methods in UIPickerDelegate Protocol:
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component;
+
+// Methods in UISearchBarDelegate Protocol:
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText;
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar;
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar;
 
 @end

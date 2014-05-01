@@ -137,7 +137,7 @@
     [rootView addSubview:pageControl];
     
     // Use UIPickerView:
-    UIPickerView *pickerView = [[UIPickerView alloc]initWithFrame:CGRectMake(screenFrame.size.width/2, 158, screenFrame.size.width/2, 400)];
+    UIPickerView *pickerView = [[UIPickerView alloc]initWithFrame:CGRectMake(screenFrame.size.width/2, 150, screenFrame.size.width/2, 250)];
     [pickerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
     [pickerView setShowsSelectionIndicator:YES];
     _pickerArray = [[NSArray alloc] initWithObjects:@"Android", @"iOS", @"WindowsPhone", @"WindowsMobile", @"BlackBerry", @"Symbian", @"MeeGo", nil];
@@ -145,8 +145,17 @@
     [pickerView setDataSource:self];
     [rootView addSubview:pickerView];
     
+    // Use UISearchBar:
+    UISearchBar *searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 400, screenFrame.size.width, 30)];
+    [searchBar setDelegate:self];
+    [searchBar setShowsCancelButton:YES];
+    [searchBar setBarStyle:UIBarStyleDefault];
+    [searchBar setPlaceholder:@"Enter mail address..."];
+    [searchBar setKeyboardType:UIKeyboardTypeEmailAddress];
+    [rootView addSubview:searchBar];
+    
     // Use UIWebView:
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 213, screenFrame.size.width/2, screenFrame.size.height-200)];
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 213, screenFrame.size.width/2, screenFrame.size.height-300)];
     [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://RincLiu.com"]]];
     [rootView addSubview:webView];
 }
@@ -183,6 +192,22 @@
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     [self showMessage:[NSString stringWithFormat:@"You selected: %@", [_pickerArray objectAtIndex:row]]];
+}
+
+// Methods in UISearchBarDelegate Protocol:
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    NSLog(@"searchText: %@", searchText);
+}
+
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    NSLog(@"cancel button clicked");
+}
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    NSLog(@"search button clicked");
 }
 
 // Events Handler Methods:
