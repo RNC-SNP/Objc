@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RLAppDelegate : UIResponder <UIApplicationDelegate, UITabBarDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UISearchBarDelegate>
+@interface RLAppDelegate : UIResponder <UIApplicationDelegate, UITabBarDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UISearchBarDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
@@ -35,5 +35,9 @@
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText;
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar;
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar;
+
+// Methods in UITextFieldDelegate Protocol:
+-(void)textFieldDidBeginEditing:(UITextField *)textField;
+-(void)textFieldDidEndEditing:(UITextField *)textField;
 
 @end

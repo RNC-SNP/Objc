@@ -13,6 +13,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self createCustomView];
+    _isKeyboardShown = NO;
     return YES;
 }
 
@@ -136,8 +137,19 @@
     [pageControl addTarget:self action:@selector(changePage:) forControlEvents:UIControlEventValueChanged];
     [rootView addSubview:pageControl];
     
+    // Use UITextField:
+    UITextField *textfield = [[UITextField alloc]initWithFrame:CGRectMake(screenFrame.size.width/2, 150, screenFrame.size.width/2, 30)];
+    [textfield setBorderStyle:UITextBorderStyleRoundedRect];
+    [textfield setAutocorrectionType:UITextAutocorrectionTypeYes];
+    [textfield setPlaceholder:@"Enter words..."];
+    [textfield setClearsOnBeginEditing:YES];
+    [textfield setClearButtonMode:UITextFieldViewModeWhileEditing];
+    [textfield setAdjustsFontSizeToFitWidth:YES];
+    [textfield setDelegate:self];
+    [rootView addSubview:textfield];
+    
     // Use UIPickerView:
-    UIPickerView *pickerView = [[UIPickerView alloc]initWithFrame:CGRectMake(screenFrame.size.width/2, 150, screenFrame.size.width/2, 250)];
+    UIPickerView *pickerView = [[UIPickerView alloc]initWithFrame:CGRectMake(screenFrame.size.width/2, 190, screenFrame.size.width/2, 200)];
     [pickerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
     [pickerView setShowsSelectionIndicator:YES];
     _pickerArray = [[NSArray alloc] initWithObjects:@"Android", @"iOS", @"WindowsPhone", @"WindowsMobile", @"BlackBerry", @"Symbian", @"MeeGo", nil];
@@ -210,7 +222,24 @@
     NSLog(@"search button clicked");
 }
 
-// Events Handler Methods:
+// Methods in UITextFieldDelegate Protocol:
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    NSLog(@"Began editing...");
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    NSLog(@"Ended editing...");
+}
+
+// Called when the Return button of keyboard is clicked.
+- (BOOL)textFieldShouldReturn:(UITextField *)theTextField{
+    [theTextField resignFirstResponder];
+    return YES;
+}
+
+// Handle touch events:
 - (IBAction)onTouchUp:(id)sender {
     // Use UIActionSheet:
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"You clicked!" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Yes, I'm sure." otherButtonTitles:@"AAAA",@"BBBB",@"CCCC", nil];

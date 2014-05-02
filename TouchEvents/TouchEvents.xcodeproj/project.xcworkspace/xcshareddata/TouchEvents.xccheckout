@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>71F14342-D3AB-446A-9A14-0480BAE043BC</string>
+	<string>663A07DD-E36E-4189-AC2A-278A4C65B53A</string>
 	<key>IDESourceControlProjectName</key>
-	<string>UseUISplitViewController</string>
+	<string>TouchEvents</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>3798163D-528F-4576-B2A2-1972EC5AD167</key>
 		<string>https://bitbucket.org/RincLiu/ios-demo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>UseUISplitViewController/UseUISplitViewController.xcodeproj/project.xcworkspace</string>
+	<string>TouchEvents/TouchEvents.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>3798163D-528F-4576-B2A2-1972EC5AD167</key>
