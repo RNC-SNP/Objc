@@ -17,7 +17,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self initViews];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Init Views:
+
+-(void)initViews
+{
     CGRect screenFrame = [[UIScreen mainScreen] bounds];
     
     // Init ScrollView:
@@ -44,9 +56,11 @@
     [_scrollView addSubview:_textFieldA];
     [_scrollView addSubview:_textFieldB];
     [self.view addSubview:_scrollView];
+
 }
 
-// Methods in UITextFieldDelegate Protocol:
+#pragma mark - Methods in UITextFieldDelegate Protocol:
+
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
     _activeTextField = textField;
@@ -57,13 +71,15 @@
     _activeTextField = nil;
 }
 
-// Called when the Return button of keyboard is clicked.
+#pragma mark - Called when the Return button of keyboard is clicked.
+
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField{
     [theTextField resignFirstResponder];
     return YES;
 }
 
-// Handle keyboard events:
+#pragma mark - Handle keyboard events:
+
 -(void)keyboardWasShown:(NSNotification*)notification
 {
     if(_isKeyboardShown || _activeTextField == nil)
@@ -89,18 +105,13 @@
     _isKeyboardShown = NO;
 }
 
-// Read keyboard height from notification:
+#pragma mark - Read keyboard height from notification:
+
 -(CGFloat)getKeyBoardHeightFromNotification:(NSNotification*)notification
 {
     NSDictionary *info = [notification userInfo];
     CGSize keyboardSize = [[info objectForKey:UIKeyboardBoundsUserInfoKey] CGRectValue].size;
     return keyboardSize.height;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

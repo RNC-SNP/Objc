@@ -13,12 +13,38 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self createCustomView];
-    _isKeyboardShown = NO;
     return YES;
 }
 
+- (void)applicationWillResignActive:(UIApplication *)application
+{
+    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+}
 
-// Create custom view with code:
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Create custom views with code:
+
 - (void)createCustomView
 {
     // Get screen frame:
@@ -172,22 +198,26 @@
     [rootView addSubview:webView];
 }
 
-// Methods in UITabBarDelegate Protocol:
+#pragma mark -  Methods in UITabBarDelegate Protocol:
+
 -(void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
     NSLog(@"You selected Item: %@", item.title);
 }
 
-// Methods in UIAlertViewDelegate Protocol:
+#pragma mark - Methods in UIAlertViewDelegate Protocol:
+
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     NSLog(@"clickedButtonAtIndex: %d", buttonIndex);
 }
 
-// Methods in UIActionSheetDelegate Protocol:
+#pragma mark - Methods in UIActionSheetDelegate Protocol:
+
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     NSLog(@"clickedButtonAtIndex: %d", buttonIndex);
 }
 
-// Methods in UIPickerViewDataSource Protocol:
+#pragma mark - Methods in UIPickerViewDataSource Protocol:
+
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
     return 1;
 }
@@ -200,13 +230,14 @@
     return [_pickerArray objectAtIndex:row];
 }
 
-// Methods in UIPickerDelegate Protocol:
+#pragma mark - Methods in UIPickerDelegate Protocol:
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     [self showMessage:[NSString stringWithFormat:@"You selected: %@", [_pickerArray objectAtIndex:row]]];
 }
 
-// Methods in UISearchBarDelegate Protocol:
+#pragma mark - Methods in UISearchBarDelegate Protocol:
+
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     NSLog(@"searchText: %@", searchText);
@@ -222,7 +253,8 @@
     NSLog(@"search button clicked");
 }
 
-// Methods in UITextFieldDelegate Protocol:
+#pragma mark - Methods in UITextFieldDelegate Protocol:
+
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
     NSLog(@"Began editing...");
@@ -233,13 +265,15 @@
     NSLog(@"Ended editing...");
 }
 
-// Called when the Return button of keyboard is clicked.
+#pragma mark - Called when the Return button of keyboard is clicked.
+
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField{
     [theTextField resignFirstResponder];
     return YES;
 }
 
-// Handle touch events:
+#pragma mark - Handle touch events:
+
 - (IBAction)onTouchUp:(id)sender {
     // Use UIActionSheet:
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"You clicked!" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Yes, I'm sure." otherButtonTitles:@"AAAA",@"BBBB",@"CCCC", nil];
@@ -281,37 +315,11 @@
     [self showMessage:[[NSString alloc]initWithFormat:@"Current page: %d", pageControl.currentPage]];
 }
 
-// Use UIAlertView to show Message:
+#pragma mark - Use UIAlertView to show Message:
+
 -(void)showMessage:(NSString *)msg{
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oh..." message:msg delegate:self cancelButtonTitle:@"Calcel" otherButtonTitles:@"AAAA",@"BBBB",@"CCCC", nil];
     [alertView show];
-}
-
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
 @end

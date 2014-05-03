@@ -12,6 +12,70 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self handleNotificationsWithLaunchOptions:launchOptions];
+    return YES;
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    [self scheduleLocalNotification];
+}
+				
+- (void)applicationWillResignActive:(UIApplication *)application
+{
+    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Notification callbacks:
+
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    NSLog(@"Registered remote notification successfully.");
+    const void *deviceTokenBytes = [deviceToken bytes];
+    // Send this token to to provider.
+}
+
+-(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    NSLog(@"Failed to register remote notification.");
+}
+
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    NSLog(@"Received remote notification...");
+    UIApplication *app = [UIApplication sharedApplication];
+    [app setApplicationIconBadgeNumber:app.applicationIconBadgeNumber+1];
+    [self printNotificationDicInfo:userInfo];
+}
+
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    NSLog(@"Received local notification...");
+    UIApplication *app = [UIApplication sharedApplication];
+    [app setApplicationIconBadgeNumber:app.applicationIconBadgeNumber+1];
+    [self printNotificationDicInfo:notification.userInfo];
+}
+
+#pragma mark - Handle Notifications:
+
+-(void)handleNotificationsWithLaunchOptions:(NSDictionary *)launchOptions
+{
     UIApplication *app = [UIApplication sharedApplication];
     
     // Register remote notification:
@@ -43,39 +107,9 @@
     else{
         NSLog(@"No remote notification...");
     }
-    
-    return YES;
 }
-
--(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-    NSLog(@"Registered remote notification successfully.");
-    const void *deviceTokenBytes = [deviceToken bytes];
-    // Send this token to to provider.
-}
-
--(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
-{
-    NSLog(@"Failed to register remote notification.");
-}
-
--(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
-    NSLog(@"Received remote notification...");
-    UIApplication *app = [UIApplication sharedApplication];
-    [app setApplicationIconBadgeNumber:app.applicationIconBadgeNumber+1];
-    [self printNotificationDicInfo:userInfo];
-}
-
--(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
-{
-    NSLog(@"Received local notification...");
-    UIApplication *app = [UIApplication sharedApplication];
-    [app setApplicationIconBadgeNumber:app.applicationIconBadgeNumber+1];
-    [self printNotificationDicInfo:notification.userInfo];
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application
+                                                              
+-(void)scheduleLocalNotification
 {
     // Schedule a Local Notification:
     UILocalNotification *localNotification = [[UILocalNotification alloc]init];
@@ -100,26 +134,5 @@
         NSLog(@"%@:%@", key, [dic objectForKey:key]);
     }
 }
-				
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
+                                                              
 @end

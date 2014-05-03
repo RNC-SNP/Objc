@@ -25,7 +25,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self initViews];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Init views:
+
+-(void)initViews
+{
     // Setup UILabel:
     [_labelUser setText: @"UIView Usage..."];
     [_labelUser setTextColor:[UIColor orangeColor]];
@@ -42,12 +54,6 @@
     [_iv setImage:[[UIImage alloc]initWithData:[NSData dataWithContentsOfURL:url]]];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (IBAction)sayHello:(id)sender {
     self.username=self.textfieldUser.text;
     if([self.username length]>0){
@@ -59,14 +65,14 @@
     [self hideKeyboard:_textfieldUser];
 }
 
-// Called when the Return button of keyboard is clicked.
+#pragma mark - Called when the Return button of keyboard is clicked:
+
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField{
     if(theTextField == self.textfieldUser){
         [self hideKeyboard:theTextField];
     }
     return YES;
 }
-
 
 - (void) hideKeyboard: (UITextField *)theTextField{
     // Let the textfield give up first responder to hide keyboard.

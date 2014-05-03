@@ -19,7 +19,14 @@
     [super viewDidLoad];
 }
 
-// Handle touch events:
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Handle touch events:
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self handleTouchs:touches withEvent:event byTag:@"Began"];
@@ -49,12 +56,6 @@
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self.view];
     NSLog(@"%@->x:%f,y:%f,TouchTapCount:%d,EventType:%d,EventSubTyoe:%d,EventTimestamp:%f", tag, point.x, point.y, touch.tapCount, event.type, event.subtype, event.timestamp);
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

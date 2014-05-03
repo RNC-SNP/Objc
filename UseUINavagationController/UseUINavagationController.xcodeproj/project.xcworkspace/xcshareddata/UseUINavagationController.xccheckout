@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>A19A5410-A921-486B-ADFC-C4E8EFDA245E</string>
+	<string>AA9EBE7E-E077-480F-B63C-B90686A61137</string>
 	<key>IDESourceControlProjectName</key>
 	<string>UseUINavagationController</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>3798163D-528F-4576-B2A2-1972EC5AD167</key>
+		<key>9F0AB947-E8F0-4F97-A467-D42579BED3D7</key>
 		<string>https://bitbucket.org/RincLiu/ios-demo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>UseUINavagationController/UseUINavagationController.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>3798163D-528F-4576-B2A2-1972EC5AD167</key>
+		<key>9F0AB947-E8F0-4F97-A467-D42579BED3D7</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>3798163D-528F-4576-B2A2-1972EC5AD167</string>
+	<string>9F0AB947-E8F0-4F97-A467-D42579BED3D7</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>3798163D-528F-4576-B2A2-1972EC5AD167</string>
+			<string>9F0AB947-E8F0-4F97-A467-D42579BED3D7</string>
 			<key>IDESourceControlWCCName</key>
 			<string>iOS-Demo</string>
 		</dict>
