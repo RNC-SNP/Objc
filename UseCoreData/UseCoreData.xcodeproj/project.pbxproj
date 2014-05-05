@@ -22,6 +22,9 @@
 		8035544E1915313000D9D4B0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8035542D1915313000D9D4B0 /* UIKit.framework */; };
 		803554561915313000D9D4B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 803554541915313000D9D4B0 /* InfoPlist.strings */; };
 		803554581915313100D9D4B0 /* UseCoreDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 803554571915313100D9D4B0 /* UseCoreDataTests.m */; };
+		80F1A8E01918067300A6DE9C /* RLCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F1A8DF1918067300A6DE9C /* RLCoreDataManager.m */; };
+		80F1A8F21918129F00A6DE9C /* UserModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 80F1A8F01918129F00A6DE9C /* UserModel.xcdatamodeld */; };
+		80F1A8F5191812D200A6DE9C /* UserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F1A8F4191812D200A6DE9C /* UserEntity.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,11 @@
 		803554531915313000D9D4B0 /* UseCoreDataTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UseCoreDataTests-Info.plist"; sourceTree = "<group>"; };
 		803554551915313000D9D4B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		803554571915313100D9D4B0 /* UseCoreDataTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UseCoreDataTests.m; sourceTree = "<group>"; };
+		80F1A8DE1918067300A6DE9C /* RLCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RLCoreDataManager.h; sourceTree = "<group>"; };
+		80F1A8DF1918067300A6DE9C /* RLCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RLCoreDataManager.m; sourceTree = "<group>"; };
+		80F1A8F11918129F00A6DE9C /* UserModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserModel.xcdatamodel; sourceTree = "<group>"; };
+		80F1A8F3191812D200A6DE9C /* UserEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserEntity.h; path = UseCoreData/UserEntity.h; sourceTree = "<group>"; };
+		80F1A8F4191812D200A6DE9C /* UserEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserEntity.m; path = UseCoreData/UserEntity.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,14 +122,13 @@
 		8035542F1915313000D9D4B0 /* UseCoreData */ = {
 			isa = PBXGroup;
 			children = (
+				80F1A8EF191811EE00A6DE9C /* Data */,
+				80F1A8EE191811BC00A6DE9C /* StoryBoard */,
+				803554441915313000D9D4B0 /* Images.xcassets */,
 				803554381915313000D9D4B0 /* RLAppDelegate.h */,
 				803554391915313000D9D4B0 /* RLAppDelegate.m */,
-				8035543B1915313000D9D4B0 /* Main_iPhone.storyboard */,
-				8035543E1915313000D9D4B0 /* Main_iPad.storyboard */,
-				803554411915313000D9D4B0 /* RLViewController.h */,
-				803554421915313000D9D4B0 /* RLViewController.m */,
-				803554441915313000D9D4B0 /* Images.xcassets */,
 				803554301915313000D9D4B0 /* Supporting Files */,
+				80F1A8E319180C2100A6DE9C /* ViewController */,
 			);
 			path = UseCoreData;
 			sourceTree = "<group>";
@@ -153,6 +160,53 @@
 				803554541915313000D9D4B0 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		80F1A8E219180BF100A6DE9C /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				80F1A8DE1918067300A6DE9C /* RLCoreDataManager.h */,
+				80F1A8DF1918067300A6DE9C /* RLCoreDataManager.m */,
+			);
+			name = Manager;
+			sourceTree = "<group>";
+		};
+		80F1A8E319180C2100A6DE9C /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				803554411915313000D9D4B0 /* RLViewController.h */,
+				803554421915313000D9D4B0 /* RLViewController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		80F1A8ED191810E000A6DE9C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				80F1A8F3191812D200A6DE9C /* UserEntity.h */,
+				80F1A8F4191812D200A6DE9C /* UserEntity.m */,
+				80F1A8F01918129F00A6DE9C /* UserModel.xcdatamodeld */,
+			);
+			name = Model;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		80F1A8EE191811BC00A6DE9C /* StoryBoard */ = {
+			isa = PBXGroup;
+			children = (
+				8035543E1915313000D9D4B0 /* Main_iPad.storyboard */,
+				8035543B1915313000D9D4B0 /* Main_iPhone.storyboard */,
+			);
+			name = StoryBoard;
+			sourceTree = "<group>";
+		};
+		80F1A8EF191811EE00A6DE9C /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				80F1A8ED191810E000A6DE9C /* Model */,
+				80F1A8E219180BF100A6DE9C /* Manager */,
+			);
+			name = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,9 +308,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80F1A8F21918129F00A6DE9C /* UserModel.xcdatamodeld in Sources */,
 				8035543A1915313000D9D4B0 /* RLAppDelegate.m in Sources */,
 				803554361915313000D9D4B0 /* main.m in Sources */,
+				80F1A8F5191812D200A6DE9C /* UserEntity.m in Sources */,
 				803554431915313000D9D4B0 /* RLViewController.m in Sources */,
+				80F1A8E01918067300A6DE9C /* RLCoreDataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +528,7 @@
 				8035545D1915313100D9D4B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8035545E1915313100D9D4B0 /* Build configuration list for PBXNativeTarget "UseCoreDataTests" */ = {
 			isa = XCConfigurationList;
@@ -479,8 +537,22 @@
 				803554601915313100D9D4B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		80F1A8F01918129F00A6DE9C /* UserModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				80F1A8F11918129F00A6DE9C /* UserModel.xcdatamodel */,
+			);
+			currentVersion = 80F1A8F11918129F00A6DE9C /* UserModel.xcdatamodel */;
+			path = UserModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8035541E1915313000D9D4B0 /* Project object */;
 }

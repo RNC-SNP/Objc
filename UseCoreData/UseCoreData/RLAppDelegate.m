@@ -12,7 +12,27 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    _coreDataManager = [[RLCoreDataManager alloc]init];
+    
+    // Add data:
+    // Note: you can not init a NSManagedObject instance by call alloc and init!!
+    [_coreDataManager addUserWithName:@"Rinc Liu" andEmail:@"i@RincLiu.com"];
+    [_coreDataManager addUserWithName:@"Richard Lew" andEmail:@"i@RichardLew.com"];
+    
+    // Query data:
+    NSMutableArray *users = [_coreDataManager getUserListByPageSize:10 andOffset:0];
+    for(UserEntity *user in users)
+    {
+        NSLog(@"name: %@, email: %@", user.name, user.email);
+    }
+    
+    // Update data:
+    [_coreDataManager updateUserEmail:@"i@rincliu.com" byName:@"Rinc Liu"];
+    
+    // Delete data:
+    [_coreDataManager deleteUserByName:@"Rinc Liu"];
+    [_coreDataManager deleteUserByName:@"Richard Lew"];
+    
     return YES;
 }
 							
@@ -40,7 +60,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [_coreDataManager saveManagedObjectContext];
 }
 
 @end

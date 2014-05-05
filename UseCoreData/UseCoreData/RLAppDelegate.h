@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RLCoreDataManager.h"
+#import "UserEntity.h"
+#import <Foundation/Foundation.h>
 
 @interface RLAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property (strong, nonatomic) RLCoreDataManager *coreDataManager;
 
 @end

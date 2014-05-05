@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RLAppDelegate.h"
 
 @interface RLViewController : UIViewController
 
