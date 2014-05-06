@@ -18,7 +18,7 @@
 {
     [super viewDidLoad];
 	//[self initViews];
-    //[self initAudioPlayerWithAudioFileName:@"Here to Stay" andFileType:@"mp3"];
+    //[self initAudioPlayerWithAudioFileName:@"here-to-stay" andFileType:@"mp3"];
     [self playMovieWithURLString:@"http://www.boisestatefootball.com/sites/default/files/videos/original/01%20-%20coach%20pete%20bio_4.mp4"];
 }
 

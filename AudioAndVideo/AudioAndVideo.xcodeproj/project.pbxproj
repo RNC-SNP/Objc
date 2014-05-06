@@ -22,7 +22,7 @@
 		807B923B1919338500711435 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 807B921A1919338400711435 /* UIKit.framework */; };
 		807B92431919338500711435 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 807B92411919338500711435 /* InfoPlist.strings */; };
 		807B92451919338500711435 /* AudioAndVideoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 807B92441919338500711435 /* AudioAndVideoTests.m */; };
-		807B924F19193B2000711435 /* Here to Stay.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 807B924E19193B2000711435 /* Here to Stay.mp3 */; };
+		807B924F19193B2000711435 /* here-to-stay.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 807B924E19193B2000711435 /* here-to-stay.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +56,7 @@
 		807B92401919338500711435 /* AudioAndVideoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AudioAndVideoTests-Info.plist"; sourceTree = "<group>"; };
 		807B92421919338500711435 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		807B92441919338500711435 /* AudioAndVideoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioAndVideoTests.m; sourceTree = "<group>"; };
-		807B924E19193B2000711435 /* Here to Stay.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Here to Stay.mp3"; sourceTree = "<group>"; };
+		807B924E19193B2000711435 /* here-to-stay.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "here-to-stay.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +116,7 @@
 		807B921C1919338400711435 /* AudioAndVideo */ = {
 			isa = PBXGroup;
 			children = (
-				807B924E19193B2000711435 /* Here to Stay.mp3 */,
+				807B924E19193B2000711435 /* here-to-stay.mp3 */,
 				807B92251919338400711435 /* RLAppDelegate.h */,
 				807B92261919338400711435 /* RLAppDelegate.m */,
 				807B92281919338500711435 /* Main_iPhone.storyboard */,
@@ -239,7 +239,7 @@
 				807B92321919338500711435 /* Images.xcassets in Resources */,
 				807B922A1919338500711435 /* Main_iPhone.storyboard in Resources */,
 				807B92211919338400711435 /* InfoPlist.strings in Resources */,
-				807B924F19193B2000711435 /* Here to Stay.mp3 in Resources */,
+				807B924F19193B2000711435 /* here-to-stay.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
