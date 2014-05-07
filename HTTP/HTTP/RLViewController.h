@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RLViewController : UIViewController
+@interface RLViewController : UIViewController <UITextViewDelegate,NSURLConnectionDataDelegate>
 
 @property (strong, nonatomic) NSMutableData *data;
 

@@ -48,7 +48,14 @@
     [self.view addSubview:btnPost];
     
     _textView = [[UITextView alloc]initWithFrame:CGRectMake(0, 50, screenFrame.size.width, screenFrame.size.height-50)];
+    [_textView setDelegate:self];
     [self.view addSubview:_textView];
+}
+
+#pragma mark - UITextViewDelegate methods:
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    return NO;// Disable UITextView's edit function.
 }
 
 #pragma mark - Send HTTP Get/Post request:
