@@ -121,22 +121,26 @@
     // You can handle data in a code block as callback.
     [NSURLConnection sendAsynchronousRequest:request queue:_queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
     {
+        NSString *output = nil;
+        
         if (error != nil)
         {
             NSLog(@"Error: %@", error.localizedDescription);
-            [_aiv stopAnimating];
         }
         else
         {
-            NSString *output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            
-            // Like in Android, UI operation is only allowed in the Main Thread.
-            // You can call the method below and use a block as callback to update UI.
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                [_textView setText:output];
-                [_aiv stopAnimating];
-            });
+            output = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
         }
+        
+        // Like in Android, UI operation is only allowed in the Main Thread.
+        // You can call the method below and use a block as callback to update UI.
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            if(output != nil)
+            {
+                [_textView setText:output];
+            }
+            [_aiv stopAnimating];
+        });
     }];
 }
 
