@@ -66,7 +66,9 @@
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]];
     
+    // This method depends on the request's delegate:
     //[[NSURLConnection connectionWithRequest:request delegate:self]start];
+    
     [self sendAsyncRequest:request];
     
     [_aiv startAnimating];
@@ -83,7 +85,9 @@
     [request setTimeoutInterval:3.0f];
     [request setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
     
+    // This method depends on the request's delegate:
     //[[NSURLConnection connectionWithRequest:request delegate:self]start];
+    
     [self sendAsyncRequest:request];
     
     [_aiv startAnimating];
@@ -113,7 +117,7 @@
         _queue = [[NSOperationQueue alloc] init];
     }
     
-    // This method do not depends on the request's delegate.
+    // This method doesn't depend on the request's delegate.
     // You can handle data in a code block as callback.
     [NSURLConnection sendAsynchronousRequest:request queue:_queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
     {
