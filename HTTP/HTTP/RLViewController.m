@@ -66,7 +66,8 @@
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]];
     
-    [[NSURLConnection connectionWithRequest:request delegate:self]start];
+    //[[NSURLConnection connectionWithRequest:request delegate:self]start];
+    [self sendAsyncRequest:request];
     
     [_aiv startAnimating];
 }
@@ -82,38 +83,58 @@
     [request setTimeoutInterval:3.0f];
     [request setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
     
-    [[NSURLConnection connectionWithRequest:request delegate:self]start];
+    //[[NSURLConnection connectionWithRequest:request delegate:self]start];
+    [self sendAsyncRequest:request];
     
     [_aiv startAnimating];
 }
 
-//-(void)sendAsyncRequest:(NSURLRequest*)request
-//{
-//    if(_queue == nil)
-//    {
-//        _queue = [[NSOperationQueue alloc] init];
-//    }
-//    
-//    [NSURLConnection sendAsynchronousRequest:request queue:_queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
-//    {
-//        if ([data length] > 0 && error == nil)
-//        {
-//            NSLog(@"Received data...");
-//        }
-//        else if ([data length] == 0 && error == nil)
-//        {
-//            NSLog(@"Empty reply...");
-//        }
-//        else if (error != nil && error.code == NSURLErrorTimedOut)
-//        {
-//            NSLog(@"Request timeout...");
-//        }
-//        else if (error != nil)
-//        {
-//            NSLog(@"Error...");
-//        }
-//    }];
-//}
+-(void)sendSyncRequest:(NSURLRequest*)request
+{
+    NSURLResponse * response = nil;
+    NSError * error = nil;
+    
+    // This method will block the Main Thread, so it's not recommended.
+    NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    if (error != nil)
+    {
+        NSLog(@"Error: %@", error.localizedDescription);
+    }
+    else
+    {
+        // Handle data.
+    }
+}
+
+-(void)sendAsyncRequest:(NSURLRequest*)request
+{
+    if(_queue == nil)
+    {
+        _queue = [[NSOperationQueue alloc] init];
+    }
+    
+    // This method do not depends on the request's delegate.
+    // You can handle data in a code block as callback.
+    [NSURLConnection sendAsynchronousRequest:request queue:_queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+    {
+        if (error != nil)
+        {
+            NSLog(@"Error: %@", error.localizedDescription);
+            [_aiv stopAnimating];
+        }
+        else
+        {
+            NSString *output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            
+            // Like in Android, UI operation is only allowed in the Main Thread.
+            // You can call the method below and use a block as callback to update UI.
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [_textView setText:output];
+                [_aiv stopAnimating];
+            });
+        }
+    }];
+}
 
 #pragma mark - NSURLConnectionDataDelegate methods:
 
@@ -147,4 +168,3 @@
 }
 
 @end
-
