@@ -71,6 +71,40 @@ int main(int argc, const char* argv[]){
         [mArray replaceObjectAtIndex:1 withObject:@"WindowsMobile"];
         
         
+        // Use NSSet:
+        NSArray *array = [[NSArray alloc]initWithObjects:@"AAAA", @"BBBB", @"CCCC", nil];
+        NSSet *set1 = [NSSet setWithArray:array];
+        NSSet *set2 = [[NSSet alloc]initWithObjects:@"AAAA", @"BBBB", @"CCCC", nil];
+        NSSet *set3 = [NSSet setWithObjects:@"AAAA", @"BBBB", @"CCCC", @"DDDD", nil];
+        if([set1 isEqual:set2])
+        {
+            NSLog(@"set1 isEqual set2.");
+        }
+        if([set1 containsObject:@"AAAA"])
+        {
+            NSLog(@"set1 contains 'AAAA'.");
+        }
+        if([set1 isSubsetOfSet:set3])
+        {
+            NSLog(@"set1 is subset of set3.");
+        }
+        // Travel NSSet:
+        for(NSObject *obj in [set3 objectEnumerator])
+        {
+            NSLog(@"object in set3:%@", obj);
+        }
+        // Use NSMutableSet:
+        NSMutableSet *mSet = [NSMutableSet setWithCapacity:10];
+        [mSet addObject:@"XXXX"];
+        // Add NSSet to NSMutableSet:
+        [mSet unionSet:set3];
+        // Delete NSSet from NSMutableSet:
+        [mSet minusSet:set1];
+        for(NSObject *obj in [mSet objectEnumerator])
+        {
+            NSLog(@"object in mSet:%@", obj);
+        }
+        
         // Use Dictionary:
         NSDictionary *dic1 = @{@"key1":@"value1", @"key2":@"value2"};
         NSDictionary *dic2 = [NSDictionary dictionaryWithObjectsAndKeys: @"Java", @"Android", @"Objective-C", @"iOS", @"C#", @"WinPhone", nil];
