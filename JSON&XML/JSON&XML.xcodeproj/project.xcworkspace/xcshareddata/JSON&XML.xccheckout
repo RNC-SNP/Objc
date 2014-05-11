@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>ABB63B62-EC2D-4290-95C7-B871809CB3CB</string>
+	<string>B8E6B2E9-3C84-4826-A9C4-489F69D83D65</string>
 	<key>IDESourceControlProjectName</key>
-	<string>SettingsBundle</string>
+	<string>JSON&amp;XML</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>42FD9BAF-A07A-4E51-B174-5641EF7272D8</key>
 		<string>https://bitbucket.org/RincLiu/ios-demo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>SettingsBundle/SettingsBundle.xcodeproj/project.xcworkspace</string>
+	<string>JSON&amp;XML/JSON&amp;XML.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>42FD9BAF-A07A-4E51-B174-5641EF7272D8</key>
