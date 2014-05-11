@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Rinc Liu</key>
+	<dict>
+		<key>site</key>
+		<string>http://RincLiu.com</string>
+		<key>email</key>
+		<string>i@RincLiu.com</string>
+	</dict>
+	<key>Richard Lew</key>
+	<dict>
+		<key>email</key>
+		<string>i@RichardLew.com</string>
+		<key>site</key>
+		<string>http://RichardLew.com</string>
+	</dict>
+</dict>
+</plist>

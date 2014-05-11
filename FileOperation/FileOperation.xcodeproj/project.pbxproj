@@ -22,6 +22,7 @@
 		80364F1E191BBD3D00DA1B52 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80364EFD191BBD3D00DA1B52 /* UIKit.framework */; };
 		80364F26191BBD3D00DA1B52 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80364F24191BBD3D00DA1B52 /* InfoPlist.strings */; };
 		80364F28191BBD3D00DA1B52 /* FileOperationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 80364F27191BBD3D00DA1B52 /* FileOperationTests.m */; };
+		809CF864191F83F1000449FA /* PropertyList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 809CF863191F83F1000449FA /* PropertyList.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		80364F23191BBD3D00DA1B52 /* FileOperationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FileOperationTests-Info.plist"; sourceTree = "<group>"; };
 		80364F25191BBD3D00DA1B52 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		80364F27191BBD3D00DA1B52 /* FileOperationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileOperationTests.m; sourceTree = "<group>"; };
+		809CF863191F83F1000449FA /* PropertyList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PropertyList.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,13 +116,14 @@
 		80364EFF191BBD3D00DA1B52 /* FileOperation */ = {
 			isa = PBXGroup;
 			children = (
+				80364F14191BBD3D00DA1B52 /* Images.xcassets */,
+				80364F0E191BBD3D00DA1B52 /* Main_iPad.storyboard */,
+				80364F0B191BBD3D00DA1B52 /* Main_iPhone.storyboard */,
+				809CF863191F83F1000449FA /* PropertyList.plist */,
 				80364F08191BBD3D00DA1B52 /* RLAppDelegate.h */,
 				80364F09191BBD3D00DA1B52 /* RLAppDelegate.m */,
-				80364F0B191BBD3D00DA1B52 /* Main_iPhone.storyboard */,
-				80364F0E191BBD3D00DA1B52 /* Main_iPad.storyboard */,
 				80364F11191BBD3D00DA1B52 /* RLViewController.h */,
 				80364F12191BBD3D00DA1B52 /* RLViewController.m */,
-				80364F14191BBD3D00DA1B52 /* Images.xcassets */,
 				80364F00191BBD3D00DA1B52 /* Supporting Files */,
 			);
 			path = FileOperation;
@@ -235,6 +238,7 @@
 				80364F10191BBD3D00DA1B52 /* Main_iPad.storyboard in Resources */,
 				80364F15191BBD3D00DA1B52 /* Images.xcassets in Resources */,
 				80364F0D191BBD3D00DA1B52 /* Main_iPhone.storyboard in Resources */,
+				809CF864191F83F1000449FA /* PropertyList.plist in Resources */,
 				80364F04191BBD3D00DA1B52 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -471,6 +475,7 @@
 				80364F2D191BBD3D00DA1B52 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		80364F2E191BBD3D00DA1B52 /* Build configuration list for PBXNativeTarget "FileOperationTests" */ = {
 			isa = XCConfigurationList;
@@ -479,6 +484,7 @@
 				80364F30191BBD3D00DA1B52 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -28,6 +28,10 @@
     [self changeCurrentDirToWrite];
     [self writeWithNSMutableData];
     [self readWithNSData];
+    
+    NSMutableDictionary *dic = [self readPropertyList];
+    NSLog(@"data in plist:%@", dic);
+    [self writePropertyList];
 }
 
 - (void)didReceiveMemoryWarning
@@ -115,6 +119,31 @@
     [data getBytes:&intData range:NSMakeRange(26, sizeof(intData))];
     [data getBytes:&floatData range:NSMakeRange(26 + sizeof(intData), sizeof(floatData))];
     NSLog(@"stringData:%@\n intData:%d\n floatData:%f", stringData, intData, floatData);
+}
+
+#pragma mark - Use plist:
+
+-(NSMutableDictionary*)readPropertyList
+{
+    // Read plist path from Main Bundle:
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"PropertyList" ofType:@"plist"];
+    // Read data in plist:
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    return dic;
+}
+
+-(void)writePropertyList
+{
+    NSMutableDictionary *dic = [self readPropertyList];
+    
+    [dic setObject:@"newValue" forKey:@"newKey"];
+    
+    NSString *newPlistPath = [[self searchDir:NSDocumentDirectory]stringByAppendingString:@"NewPropertyList.plist"];
+    
+    [dic writeToFile:newPlistPath atomically:YES];
+    
+    NSMutableDictionary *newDic = [[NSMutableDictionary alloc] initWithContentsOfFile:newPlistPath];
+    NSLog(@"data in new plist:%@", newDic);
 }
 
 #pragma mark - Use NSFileManager:
