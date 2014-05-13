@@ -8,6 +8,8 @@
 
 #import "RLViewController.h"
 
+#define IMAGE_URL @"http://RincLiu.com/favicon.png"
+
 @interface RLViewController ()
 
 @end
@@ -39,14 +41,14 @@
 {
     // Handle data in global thread queue:
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        _url = [NSURL URLWithString:@"http://rincliu.com/favicon.png"];
+        _url = [NSURL URLWithString:IMAGE_URL];
         _data = [[NSData alloc]initWithContentsOfURL:_url];
         _image = [[UIImage alloc]initWithData:_data];
         if(_data != nil)
         {
             // Update UI on Main Thread queue:
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.imageView setImage:_image];
+                [_imageView setImage:_image];
             });
         }
     });
@@ -59,7 +61,7 @@
     
     dispatch_group_async(group, queue, ^{
         [NSThread sleepForTimeInterval:1];
-        _url = [NSURL URLWithString:@"http://rincliu.com/favicon.png"];
+        _url = [NSURL URLWithString:IMAGE_URL];
         NSLog(@"Got url in thread1.");
     });
     
@@ -76,7 +78,7 @@
     });
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-        [self.imageView setImage:_image];
+        [_imageView setImage:_image];
         NSLog(@"Updated UI in main thread.");
     });
     
@@ -90,7 +92,7 @@
     
     dispatch_async(queue, ^{
         [NSThread sleepForTimeInterval:2];
-        _url = [NSURL URLWithString:@"http://rincliu.com/favicon.png"];
+        _url = [NSURL URLWithString:IMAGE_URL];
         NSLog(@"Got url in thread1.");
     });
     
@@ -109,7 +111,7 @@
     
     dispatch_async(queue, ^{
         [NSThread sleepForTimeInterval:1];
-        [self.imageView setImage:_image];
+        [_imageView setImage:_image];
         NSLog(@"Updated UI in main thread.");
     });
 }
@@ -119,13 +121,13 @@
     // You can specify the times of running with this method:
     dispatch_apply(10, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(size_t size){
         NSLog(@"%zu", size);
-        _url = [NSURL URLWithString:@"http://rincliu.com/favicon.png"];
+        _url = [NSURL URLWithString:IMAGE_URL];
         _data = [[NSData alloc]initWithContentsOfURL:_url];
         _image = [[UIImage alloc]initWithData:_data];
         if(_data != nil)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.imageView setImage:_image];
+                [_imageView setImage:_image];
             });
         }
     });

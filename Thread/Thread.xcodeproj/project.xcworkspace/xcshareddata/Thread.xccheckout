@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>F1195B29-048E-4405-866B-47B182204FB0</string>
+	<string>44A2F745-67BD-4A8C-AF16-1B402A450F84</string>
 	<key>IDESourceControlProjectName</key>
-	<string>GrandCentralDispatch</string>
+	<string>Thread</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>75A4654C-3DFC-4DAE-8487-AEB9C136EC6F</key>
 		<string>https://bitbucket.org/RincLiu/ios-demo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>GrandCentralDispatch/GrandCentralDispatch.xcodeproj/project.xcworkspace</string>
+	<string>Thread/Thread.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>75A4654C-3DFC-4DAE-8487-AEB9C136EC6F</key>
