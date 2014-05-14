@@ -1,12 +1,13 @@
 //
 //  RLViewController.m
-//  Animation
+//  Layer&Animation
 //
 //  Created by RincLiu on 5/14/14.
 //  Copyright (c) 2014 Rinc Liu. All rights reserved.
 //
 
 #import "RLViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define IMAGE_URL @"https://avatars3.githubusercontent.com/u/3728159"
 
@@ -69,16 +70,16 @@
 {
     CALayer *customDrawn = [CALayer layer];
     customDrawn.delegate = self;
-//    customDrawn.backgroundColor = [UIColor greenColor].CGColor;
-//    customDrawn.frame = CGRectMake(30, 250, 280, 200);
-//    customDrawn.shadowOffset = CGSizeMake(0, 3);
-//    customDrawn.shadowRadius = 5.0;
-//    customDrawn.shadowColor = [UIColor blackColor].CGColor;
-//    customDrawn.shadowOpacity = 0.8;
-//    customDrawn.cornerRadius = 10.0;
-//    customDrawn.borderColor = [UIColor blackColor].CGColor;
-//    customDrawn.borderWidth = 2.0;
-//    customDrawn.masksToBounds = YES;
+    //    customDrawn.backgroundColor = [UIColor greenColor].CGColor;
+    //    customDrawn.frame = CGRectMake(30, 250, 280, 200);
+    //    customDrawn.shadowOffset = CGSizeMake(0, 3);
+    //    customDrawn.shadowRadius = 5.0;
+    //    customDrawn.shadowColor = [UIColor blackColor].CGColor;
+    //    customDrawn.shadowOpacity = 0.8;
+    //    customDrawn.cornerRadius = 10.0;
+    //    customDrawn.borderColor = [UIColor blackColor].CGColor;
+    //    customDrawn.borderWidth = 2.0;
+    //    customDrawn.masksToBounds = YES;
     [layer addSublayer:customDrawn];
 }
 

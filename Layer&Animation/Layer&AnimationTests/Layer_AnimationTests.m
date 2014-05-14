@@ -1,6 +1,6 @@
 //
-//  AnimationTests.m
-//  AnimationTests
+//  Layer_AnimationTests.m
+//  Layer&AnimationTests
 //
 //  Created by RincLiu on 5/14/14.
 //  Copyright (c) 2014 Rinc Liu. All rights reserved.
@@ -8,11 +8,11 @@
 
 #import <XCTest/XCTest.h>
 
-@interface AnimationTests : XCTestCase
+@interface Layer_AnimationTests : XCTestCase
 
 @end
 
-@implementation AnimationTests
+@implementation Layer_AnimationTests
 
 - (void)setUp
 {
