@@ -23,8 +23,9 @@
 	
     CALayer *layer = self.view.layer;
     [self modifyLayer:layer];
-    [self addSubLayerToLayer:layer];
-    [self setDelegateToLayer:layer];
+    CALayer *subLayer = [self addSubLayerToLayer:layer];
+    //[self setDelegateToLayer:layer];
+    [self addAnimationToLayer:subLayer];
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,7 +42,7 @@
     [layer setCornerRadius:10.0];
 }
 
--(void)addSubLayerToLayer:(CALayer*)layer
+-(CALayer*)addSubLayerToLayer:(CALayer*)layer
 {
     // Create a new layer:
     CALayer *sublayer = [CALayer layer];
@@ -62,6 +63,7 @@
     [sublayer setContents:(id)[UIImage imageWithData:data].CGImage];
     // Add subLayer:
     [layer addSublayer:sublayer];
+    return sublayer;
 }
 
 #pragma mark - Use CALayerDelegate to draw customized content:
@@ -132,5 +134,57 @@ static inline double radians (double degrees)
 }
 
 #pragma mark - Use CoreAnimation:
+
+-(void)addAnimationToLayer:(CALayer*)layer
+{
+    //Init path to create KeyFrameAnimation:
+    CGPoint point1 = layer.frame.origin;
+    CGPoint point2 = CGPointMake(300, 460);
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:point1];
+    [path addQuadCurveToPoint:point2 controlPoint:CGPointMake(300,0)];
+    [path addLineToPoint:point1];
+    
+    //Use KeyFrameAnimation:
+    CAKeyframeAnimation *positionAnim = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    [positionAnim setPath:path.CGPath];
+    [positionAnim setDuration:9];
+    [positionAnim setRepeatCount:3];
+    [positionAnim setCumulative:NO];
+    [positionAnim setRemovedOnCompletion:YES];
+    
+    //Alpha:
+    CABasicAnimation *alphaAnim = [CABasicAnimation animationWithKeyPath:@"alpha"];
+    [alphaAnim setFromValue:[NSNumber numberWithFloat:1.0]];
+    [alphaAnim setToValue:[NSNumber numberWithFloat:0.1]];
+    [alphaAnim setDuration:9];
+    [alphaAnim setRepeatCount:3];
+    [alphaAnim setCumulative:NO];
+    [alphaAnim setRemovedOnCompletion:YES];
+    
+    //Scale Transform:
+    CABasicAnimation *scaleTransformAnim = [CABasicAnimation animationWithKeyPath:@"transform"];
+    [scaleTransformAnim setFromValue:[NSValue valueWithCATransform3D:CATransform3DIdentity]];
+    [scaleTransformAnim setToValue:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.1, 0.1, 1.0)]];
+    [scaleTransformAnim setDuration:9];
+    [scaleTransformAnim setRepeatCount:3];
+    [scaleTransformAnim setCumulative:NO];
+    [scaleTransformAnim setRemovedOnCompletion:YES];
+    
+    //Rotation Transform:
+    CABasicAnimation *rotationTransformAnim = [CABasicAnimation animationWithKeyPath:@"transform"];
+    [rotationTransformAnim setFromValue:[NSValue valueWithCATransform3D:CATransform3DIdentity]];
+    [rotationTransformAnim setToValue:[NSValue valueWithCATransform3D:CATransform3DMakeRotation(M_PI, 1, 1, 1)]];
+    [rotationTransformAnim setDuration:9];
+    [rotationTransformAnim setRepeatCount:3];
+    [rotationTransformAnim setCumulative:YES];
+    [rotationTransformAnim setRemovedOnCompletion:YES];
+    
+    //Use AnimationGroup:
+    CAAnimationGroup *animGroup = [CAAnimationGroup animation];
+    [animGroup setAnimations:[NSArray arrayWithObjects:positionAnim, alphaAnim, scaleTransformAnim, rotationTransformAnim, nil]];
+    [animGroup setDuration:27];
+    [layer addAnimation:animGroup forKey:nil];
+}
 
 @end
