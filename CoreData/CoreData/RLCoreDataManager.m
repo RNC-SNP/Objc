@@ -31,7 +31,7 @@
 {
     if(_persistentStoreCoordinator == nil)
     {
-        NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"NewsModel.sqlite"];
+        NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"UserModel.sqlite"];
         
         _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]initWithManagedObjectModel:[self getManagedObjectModel]];
         NSError *err = nil;
