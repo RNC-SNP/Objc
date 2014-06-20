@@ -1,4 +1,4 @@
 iOS-Demo
 ========
 
-Demos of iOS.
+Demos of iOS and Objective-C.
