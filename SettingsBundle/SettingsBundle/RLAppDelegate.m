@@ -94,7 +94,7 @@
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    [defaults setValue:@"Richard Lew" forKey:@"pref_name"];
+    [defaults setValue:@"Rinc Liu" forKey:@"pref_name"];
     [defaults setBool:NO forKey:@"pref_verified"];
     [defaults setInteger:9 forKey:@"pref_level"];
     [defaults setValue:@"en" forKey:@"pref_lang"];

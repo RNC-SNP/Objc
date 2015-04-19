@@ -10,29 +10,29 @@
 	<string>CoreData</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>F75AF245-480B-41F6-8E62-79236853136A</key>
+		<key>BECB4640CC40D955F0DBF245880EE14B645428EE</key>
 		<string>https://bitbucket.org/RincLiu/ios-demo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>CoreData/CoreData.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>F75AF245-480B-41F6-8E62-79236853136A</key>
+		<key>BECB4640CC40D955F0DBF245880EE14B645428EE</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://bitbucket.org/RincLiu/ios-demo.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>F75AF245-480B-41F6-8E62-79236853136A</string>
+	<string>BECB4640CC40D955F0DBF245880EE14B645428EE</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>F75AF245-480B-41F6-8E62-79236853136A</string>
+			<string>BECB4640CC40D955F0DBF245880EE14B645428EE</string>
 			<key>IDESourceControlWCCName</key>
 			<string>iOS-Demo</string>
 		</dict>
