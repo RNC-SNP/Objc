@@ -7,7 +7,7 @@
 
 @implementation Recorder
 
--(id)init {
+-(instancetype)init {
     if (self = [super init]) {
         _settings = [[NSMutableDictionary alloc] init];
         [_settings setValue:[NSNumber numberWithInt:kAudioFormatLinearPCM] forKey:AVFormatIDKey];

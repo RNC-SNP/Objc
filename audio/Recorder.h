@@ -3,7 +3,7 @@
 
 @interface Recorder : NSObject<AVAudioRecorderDelegate>
 
--(id)init;
+-(instancetype)init;
 
 -(void)start;
 

@@ -13,7 +13,7 @@ compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 @implementation StreamAudioPlayer
 
--(id)initWithUrl:(NSString*)url {
+-(instancetype)initWithUrl:(NSString*)url {
     if (self = [super init]) {
         _player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:url]];
         [[NSNotificationCenter defaultCenter] addObserver:self
