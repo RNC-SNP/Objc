@@ -6,7 +6,7 @@
 @property (nonatomic,strong) AVCaptureSession *session;
 @property (nonatomic,strong) AVCaptureVideoPreviewLayer *previewLayer;
 @property (nonatomic,strong) AVCaptureOutput *output;
-@property (nonatomic,assign) NSInteger currentMode;
+@property (nonatomic,assign) NSUInteger currentMode;
 @end
 
 @implementation CaptureView
@@ -33,7 +33,7 @@
     return self;
 }
 
--(void)initScanMode {
+-(void)initCodeScanner {
     AVCaptureMetadataOutput *metadataOutput = [AVCaptureMetadataOutput new];
     [metadataOutput setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
     [_session addOutput:metadataOutput];
@@ -41,34 +41,34 @@
     _output = metadataOutput;
 }
 
--(void)initPhotoMode {
-    _session.sessionPreset = AVCaptureSessionPresetMedium;
+-(void)initPhotoCamera {
+    _session.sessionPreset = AVCaptureSessionPresetHigh;
     AVCaptureStillImageOutput *stillImageOutput = [AVCaptureStillImageOutput new];
-    NSDictionary *outputSettings = [[NSDictionary alloc]initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, nil];
+    NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, nil];
     [stillImageOutput setOutputSettings:outputSettings];
     [_session addOutput:stillImageOutput];
     _output = stillImageOutput;
 }
 
--(void)initVideoMode {
+-(void)initVideoCamera {
     //TODO
 }
 
--(void)setMode:(CaptureViewMode)mode {
+-(void)setMode:(CaptureMode)mode {
     if (_session != nil && _output != nil) {
         [_session removeOutput:_output];
     }
     switch (mode) {
-        case CaptureViewModeScan: {
-            [self initScanMode];
+        case CaptureModeCodeScanner: {
+            [self initCodeScanner];
             break;
         }
-        case CaptureViewModePhoto: {
-            [self initPhotoMode];
+        case CaptureModePhotoCamera: {
+            [self initPhotoCamera];
             break;
         }
-        case CaptureViewModeVideo: {
-            [self initVideoMode];
+        case CaptureModeVideoCamera: {
+            [self initVideoCamera];
             break;
         }
     }
@@ -88,7 +88,7 @@
 }
 
 -(void)takePhoto {
-    if (_output != nil && _currentMode == CaptureViewModePhoto) {
+    if (_output != nil && _currentMode == CaptureModePhotoCamera) {
         AVCaptureConnection *mConnection = nil;
         AVCaptureStillImageOutput *stillImageOutput = (AVCaptureStillImageOutput*)_output;
         for (AVCaptureConnection *connection in stillImageOutput.connections) {
@@ -116,6 +116,14 @@
             }
          }];
     }
+}
+
+-(void)startRecordVideo {
+    //TODO
+}
+
+-(void)stopRecordVideo {
+    //TODO
 }
 
 #pragma mark AVCaptureMetadataOutputObjectsDelegate

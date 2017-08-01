@@ -1,9 +1,9 @@
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, CaptureViewMode) {
-    CaptureViewModeScan,
-    CaptureViewModePhoto,
-    CaptureViewModeVideo
+typedef NS_ENUM(NSUInteger, CaptureMode) {
+    CaptureModeCodeScanner,
+    CaptureModePhotoCamera,
+    CaptureModeVideoCamera
 };
 
 @protocol CaptureViewDelegate <NSObject>
@@ -20,12 +20,16 @@ typedef NS_ENUM(NSInteger, CaptureViewMode) {
 
 @property (nonatomic,weak) id<CaptureViewDelegate> delegate;
 
--(void)setMode:(CaptureViewMode)mode;
+-(void)setMode:(CaptureMode)mode;
 
 -(void)startCapture;
 
 -(void)stopCapture;
 
 -(void)takePhoto;
+
+-(void)startRecordVideo;
+
+-(void)stopRecordVideo;
 
 @end
