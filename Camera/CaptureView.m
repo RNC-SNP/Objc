@@ -14,6 +14,7 @@
 -(instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         _session = [AVCaptureSession new];
+        _session.sessionPreset = AVCaptureSessionPresetHigh;
         
         NSError *error = nil;
         AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:
@@ -42,7 +43,6 @@
 }
 
 -(void)initPhotoCamera {
-    _session.sessionPreset = AVCaptureSessionPresetHigh;
     AVCaptureStillImageOutput *stillImageOutput = [AVCaptureStillImageOutput new];
     NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, nil];
     [stillImageOutput setOutputSettings:outputSettings];
