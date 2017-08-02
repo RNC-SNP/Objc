@@ -26,11 +26,11 @@ typedef NS_ENUM(NSUInteger, CaptureMode) {
 
 -(BOOL)hasBackCamera;
 
--(BOOL)hasMultipleCameras;
+-(BOOL)turnFlashOn:(BOOL)on;
 
 -(void)setMode:(CaptureMode)mode;
 
--(void)switchFrontBackCamera;
+-(BOOL)switchFrontBackCamera;
 
 -(void)startCapture;
 

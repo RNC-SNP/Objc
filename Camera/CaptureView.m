@@ -5,6 +5,7 @@
 @interface CaptureView()<AVCaptureMetadataOutputObjectsDelegate>
 @property (nonatomic,strong) AVCaptureSession *session;
 @property (nonatomic,strong) AVCaptureVideoPreviewLayer *previewLayer;
+@property (nonatomic,strong) AVCaptureDevice *device;
 @property (nonatomic,strong) AVCaptureDeviceInput *input;
 @property (nonatomic,strong) AVCaptureOutput *output;
 @property (nonatomic,assign) NSUInteger currentMode;
@@ -18,8 +19,8 @@
             _session = [AVCaptureSession new];
             
             NSError *error = nil;
-            _input = [AVCaptureDeviceInput deviceInputWithDevice:
-                                           [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo] error:&error];
+            _device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+            _input = [AVCaptureDeviceInput deviceInputWithDevice:_device error:&error];
             if (_input) {
                 if ([_session canAddInput:_input]) {
                     [_session addInput:_input];
@@ -141,13 +142,19 @@
     return [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear];
 }
 
--(BOOL)hasMultipleCameras {
-    NSArray *devices = [self devices];
-    return devices != nil && [devices count] > 1;
+-(BOOL)turnFlashOn:(BOOL)on {
+    if (_device != nil && [_device hasTorch] && [_device hasFlash]) {
+        [_device lockForConfiguration:nil];
+        [_device setTorchMode:on ? AVCaptureTorchModeOn : AVCaptureTorchModeOff];
+        [_device setFlashMode:on ? AVCaptureFlashModeOn : AVCaptureFlashModeOff];
+        [_device unlockForConfiguration];
+        return YES;
+    }
+    return NO;
 }
 
 -(AVCaptureDevice*)cameraWithPosition:(AVCaptureDevicePosition)position {
-    for (AVCaptureDevice *device in [self devices]) {
+    for (AVCaptureDevice *device in [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo]) {
         if (device.position == position) {
             return device;
         }
@@ -155,31 +162,23 @@
     return nil;
 }
 
--(NSArray*)devices {
-    return [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
-}
-
--(void)switchFrontBackCamera {
-    if ([self hasMultipleCameras]) {
-        NSArray *inputs = _session.inputs;
-        for (AVCaptureDeviceInput *input in inputs) {
-            AVCaptureDevice *device = input.device;
-            if ([device hasMediaType:AVMediaTypeVideo]) {
-                [_session beginConfiguration];
-                AVCaptureDevice *cameraDevice = [self cameraWithPosition:device.position == AVCaptureDevicePositionFront ? AVCaptureDevicePositionBack : AVCaptureDevicePositionFront];
-                AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:cameraDevice error:nil];
-                [_session removeInput:_input];
-                if ([_session canAddInput:input]) {
-                    [_session addInput:input];
-                    _input = input;
-                } else {
-                    [_session addInput:_input];
-                }
-                [_session commitConfiguration];
-                break;
-            }
+-(BOOL)switchFrontBackCamera {
+    if ([self hasFrontCamera] && [self hasBackCamera] && _device != nil) {
+        [_session beginConfiguration];
+        AVCaptureDevice *device = [self cameraWithPosition:_device.position == AVCaptureDevicePositionFront ? AVCaptureDevicePositionBack : AVCaptureDevicePositionFront];
+        AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
+        [_session removeInput:_input];
+        if ([_session canAddInput:input]) {
+            [_session addInput:input];
+            _device = device;
+            _input = input;
+        } else {
+            [_session addInput:_input];
         }
+        [_session commitConfiguration];
+        return YES;
     }
+    return NO;
 }
 
 -(void)takePhoto {
