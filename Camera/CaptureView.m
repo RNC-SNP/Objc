@@ -5,6 +5,7 @@
 @interface CaptureView()<AVCaptureMetadataOutputObjectsDelegate>
 @property (nonatomic,strong) AVCaptureSession *session;
 @property (nonatomic,strong) AVCaptureVideoPreviewLayer *previewLayer;
+@property (nonatomic,strong) AVCaptureDeviceInput *input;
 @property (nonatomic,strong) AVCaptureOutput *output;
 @property (nonatomic,assign) NSUInteger currentMode;
 @end
@@ -13,66 +14,101 @@
 
 -(instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        _session = [AVCaptureSession new];
-        _session.sessionPreset = AVCaptureSessionPresetHigh;
-        
-        NSError *error = nil;
-        AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:
-                                       [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo] error:&error];
-        if (input) {
-            [_session addInput:input];
-        } else {
-            NSLog(@"CaptureSession Error: %@", error);
+        if ([self hasCamera]) {
+            _session = [AVCaptureSession new];
+            
+            NSError *error = nil;
+            _input = [AVCaptureDeviceInput deviceInputWithDevice:
+                                           [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo] error:&error];
+            if (_input) {
+                if ([_session canAddInput:_input]) {
+                    [_session addInput:_input];
+                } else {
+                    NSLog(@"CaptureSession addInput failed");
+                }
+            } else {
+                NSLog(@"CaptureSession init Error: %@", error);
+            }
+            
+            _previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:_session];
+            _previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+            frame.origin.x = frame.origin.y = 0;
+            _previewLayer.frame = frame;
+            [self.layer addSublayer:_previewLayer];
         }
-        
-        _previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:_session];
-        _previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-        frame.origin.x = frame.origin.y = 0;
-        _previewLayer.frame = frame;
-        [self.layer addSublayer:_previewLayer];
     }
     return self;
 }
 
--(void)initCodeScanner {
+-(void)initCodeScannerOutput {
+    [self setSessionPreset:AVCaptureSessionPresetHigh];
     AVCaptureMetadataOutput *metadataOutput = [AVCaptureMetadataOutput new];
     [metadataOutput setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
-    [_session addOutput:metadataOutput];
-    metadataOutput.metadataObjectTypes = [metadataOutput availableMetadataObjectTypes];
-    _output = metadataOutput;
+    if ([self setSessionOutput:metadataOutput]) {
+        metadataOutput.metadataObjectTypes = [metadataOutput availableMetadataObjectTypes];
+    }
 }
 
--(void)initPhotoCamera {
+-(void)initPhotoCameraOutput {
+    [self setSessionPreset:AVCaptureSessionPresetPhoto];
     AVCaptureStillImageOutput *stillImageOutput = [AVCaptureStillImageOutput new];
-    NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, nil];
-    [stillImageOutput setOutputSettings:outputSettings];
-    [_session addOutput:stillImageOutput];
-    _output = stillImageOutput;
+    [stillImageOutput setOutputSettings:@{AVVideoCodecKey:AVVideoCodecJPEG}];
+    if ([stillImageOutput respondsToSelector:@selector(setHighResolutionStillImageOutputEnabled:)]) {
+        stillImageOutput.highResolutionStillImageOutputEnabled = YES;
+    }
+    [self setSessionOutput:stillImageOutput];
 }
 
--(void)initVideoCamera {
+-(void)initVideoCameraOutput {
+    [self setSessionPreset:AVCaptureSessionPresetHigh];
     //TODO
 }
 
--(void)setMode:(CaptureMode)mode {
-    if (_session != nil && _output != nil) {
+-(BOOL)setSessionOutput:(AVCaptureOutput*)output {
+    if (_output != nil) {
         [_session removeOutput:_output];
     }
-    switch (mode) {
-        case CaptureModeCodeScanner: {
-            [self initCodeScanner];
-            break;
+    if ([_session canAddOutput:output]) {
+        [_session addOutput:output];
+        _output = output;
+        return YES;
+    } else {
+        NSLog(@"CaptureSession add %@ failed", output);
+        if (_output != nil) {
+            [_session addOutput:_output];
         }
-        case CaptureModePhotoCamera: {
-            [self initPhotoCamera];
-            break;
-        }
-        case CaptureModeVideoCamera: {
-            [self initVideoCamera];
-            break;
-        }
+        return NO;
     }
-    _currentMode = mode;
+}
+
+-(BOOL)setSessionPreset:(NSString*)preset {
+    if ([_session canSetSessionPreset:preset]) {
+        _session.sessionPreset = preset;
+        return YES;
+    }
+    return NO;
+}
+
+-(void)setMode:(CaptureMode)mode {
+    if (_session != nil) {
+        [_session beginConfiguration];
+        switch (mode) {
+            case CaptureModeCodeScanner: {
+                [self initCodeScannerOutput];
+                break;
+            }
+            case CaptureModePhotoCamera: {
+                [self initPhotoCameraOutput];
+                break;
+            }
+            case CaptureModeVideoCamera: {
+                [self initVideoCameraOutput];
+                break;
+            }
+        }
+        [_session commitConfiguration];
+        _currentMode = mode;
+    }
 }
 
 -(void)startCapture {
@@ -84,6 +120,65 @@
 -(void)stopCapture {
     if (_output != nil) {
         [_session stopRunning];
+    }
+}
+
+-(void)setPhotoOutputSettings:(NSDictionary*)settings {
+    if (_output != nil && _currentMode == CaptureModePhotoCamera) {
+        [(AVCaptureStillImageOutput*)_output setOutputSettings:settings];
+    }
+}
+
+-(BOOL)hasCamera {
+    return [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+}
+
+-(BOOL)hasFrontCamera {
+    return [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront];
+}
+
+-(BOOL)hasBackCamera {
+    return [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear];
+}
+
+-(BOOL)hasMultipleCameras {
+    NSArray *devices = [self devices];
+    return devices != nil && [devices count] > 1;
+}
+
+-(AVCaptureDevice*)cameraWithPosition:(AVCaptureDevicePosition)position {
+    for (AVCaptureDevice *device in [self devices]) {
+        if (device.position == position) {
+            return device;
+        }
+    }
+    return nil;
+}
+
+-(NSArray*)devices {
+    return [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+}
+
+-(void)switchFrontBackCamera {
+    if ([self hasMultipleCameras]) {
+        NSArray *inputs = _session.inputs;
+        for (AVCaptureDeviceInput *input in inputs) {
+            AVCaptureDevice *device = input.device;
+            if ([device hasMediaType:AVMediaTypeVideo]) {
+                [_session beginConfiguration];
+                AVCaptureDevice *cameraDevice = [self cameraWithPosition:device.position == AVCaptureDevicePositionFront ? AVCaptureDevicePositionBack : AVCaptureDevicePositionFront];
+                AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:cameraDevice error:nil];
+                [_session removeInput:_input];
+                if ([_session canAddInput:input]) {
+                    [_session addInput:input];
+                    _input = input;
+                } else {
+                    [_session addInput:_input];
+                }
+                [_session commitConfiguration];
+                break;
+            }
+        }
     }
 }
 

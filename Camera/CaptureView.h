@@ -20,11 +20,23 @@ typedef NS_ENUM(NSUInteger, CaptureMode) {
 
 @property (nonatomic,weak) id<CaptureViewDelegate> delegate;
 
+-(BOOL)hasCamera;
+
+-(BOOL)hasFrontCamera;
+
+-(BOOL)hasBackCamera;
+
+-(BOOL)hasMultipleCameras;
+
 -(void)setMode:(CaptureMode)mode;
+
+-(void)switchFrontBackCamera;
 
 -(void)startCapture;
 
 -(void)stopCapture;
+
+-(void)setPhotoOutputSettings:(NSDictionary*)settings;
 
 -(void)takePhoto;
 
