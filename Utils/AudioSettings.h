@@ -6,6 +6,8 @@
 
 -(void)outputToSpeaker;
 
+-(void)vibrate;
+
 -(void)setVolume:(float)volume;
 
 -(float)getVolume;

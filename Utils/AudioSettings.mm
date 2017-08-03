@@ -2,6 +2,7 @@
 
 #import <MediaPlayer/MPVolumeView.h>
 #import <AudioToolbox/AudioToolbox.h>
+#import <AudioToolbox/AudioServices.h>
 
 static AudioSettings *sharedObj = nil;
 
@@ -39,6 +40,11 @@ static AudioSettings *sharedObj = nil;
     //AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(sessionCategory), &sessionCategory);
     UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker;
     AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(audioRouteOverride), &audioRouteOverride);
+}
+
+-(void)vibrate {
+    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 }
 
 -(void)setVolume:(float)volume {
