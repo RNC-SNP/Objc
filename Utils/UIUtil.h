@@ -19,9 +19,17 @@ forControlEvents:UIControlEventTouchUpInside]
 #define SetTapCallback(v,sel) [v addGestureRecognizer:\
 [[UITapGestureRecognizer alloc]initWithTarget:self action:sel]]
 
-#define UIColorFromARGB(argb) [UIColor colorWithRed:((float)((argb & 0xFF0000) >> 16))/255.0 green:((float)((argb & 0xFF00) >> 8))/255.0 blue:((float)(argb & 0xFF))/255.0 alpha:((float)((argb & 0xFF000000) >> 24))/255.0]
+#define kSCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 
-@interface ViewUtil : NSObject
+#define kSCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+
+#define kSTATUS_BAR_HEIGHT [[UIApplication sharedApplication] statusBarFrame].size.height
+
+#define kNAVIGATION_BAR_HEIGHT self.navigationController.navigationBar.frame.size.height
+
+#define UIColorFromARGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:((float)((rgbValue & 0xFF000000) >> 24))/255.0]
+
+@interface UIUtil : NSObject
 
 +(CGFloat)measureLabelWidth:(UILabel*)label MaxWidth:(CGFloat)maxWidth;
 

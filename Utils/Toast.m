@@ -1,7 +1,5 @@
 #import "Toast.h"
-#import "Constant.h"
-#import "Colors.h"
-#import "ViewUtil.h"
+#import "UIUtil.h"
 
 static Toast *instance;
 
@@ -27,7 +25,7 @@ static Toast *instance;
         _bg = [[UIView alloc]initWithFrame:CGRectZero];
         _bg.backgroundColor = [UIColor grayColor];
         [self addSubview:_bg];
-        _label = [ViewUtil LabelFromFrame:CGRectZero Color:[UIColor whiteColor] Size:13];
+        _label = [UIUtil LabelFromFrame:CGRectZero Color:[UIColor whiteColor] Size:13];
         _label.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_label];
         self.alpha = 0;
@@ -39,7 +37,7 @@ static Toast *instance;
 -(void)showText:(NSString*)text Duration:(NSTimeInterval)duration {
     _label.text = text;
     
-    CGFloat w = [ViewUtil measureLabelWidth:_label MaxWidth:INT_MAX];
+    CGFloat w = [UIUtil measureLabelWidth:_label MaxWidth:INT_MAX];
     NSInteger lines = ceil(w * 2.0f / kSCREEN_WIDTH);
     CGRect frame = CGRectZero;
     frame.size.width = MIN(kSCREEN_WIDTH / 2, w);

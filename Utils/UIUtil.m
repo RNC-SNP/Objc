@@ -1,6 +1,6 @@
-#import "ViewUtil.h"
+#import "UIUtil.h"
 
-@implementation ViewUtil
+@implementation UIUtil
 
 +(CGFloat)measureLabelWidth:(UILabel*)label MaxWidth:(CGFloat)maxWidth {
     NSDictionary *atrr = @{NSFontAttributeName : label.font};
