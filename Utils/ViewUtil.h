@@ -19,6 +19,8 @@ forControlEvents:UIControlEventTouchUpInside]
 #define SetTapCallback(v,sel) [v addGestureRecognizer:\
 [[UITapGestureRecognizer alloc]initWithTarget:self action:sel]]
 
+#define UIColorFromARGB(argb) [UIColor colorWithRed:((float)((argb & 0xFF0000) >> 16))/255.0 green:((float)((argb & 0xFF00) >> 8))/255.0 blue:((float)(argb & 0xFF))/255.0 alpha:((float)((argb & 0xFF000000) >> 24))/255.0]
+
 @interface ViewUtil : NSObject
 
 +(CGFloat)measureLabelWidth:(UILabel*)label MaxWidth:(CGFloat)maxWidth;
