@@ -52,10 +52,10 @@ NSString* const SCHEME_MAP_BAIDU = @"baidumap://";
             [self openMapUrl:[NSString stringWithFormat:url, SCHEME_MAP_TENCENT, location.latitude, location.longitude, title]];
         } else if ([MAP_GOOGLE isEqualToString:map]){
             NSString *url = @"%@?x-source=%@&x-success=%@&saddr=&daddr=%f,%f&directionsmode=driving";
-            [self openMapUrl:[NSString stringWithFormat:url, SCHEME_MAP_GOOGLE, @"叮当", @"dingdang://", location.latitude, location.longitude]];
+            [self openMapUrl:[NSString stringWithFormat:url, SCHEME_MAP_GOOGLE, @"RINC", @"rinc://", location.latitude, location.longitude]];
         } else if ([MAP_GAODE isEqualToString:map]){
             NSString *url = @"%@navi?sourceApplication=%@&backScheme=%@&lat=%f&lon=%f&dev=0&style=2";
-            [self openMapUrl:[NSString stringWithFormat:url, SCHEME_MAP_GAODE, @"叮当", @"dingdang://", location.latitude, location.longitude]];
+            [self openMapUrl:[NSString stringWithFormat:url, SCHEME_MAP_GAODE, @"RINC", @"rinc://", location.latitude, location.longitude]];
         } else if ([MAP_BAIDU isEqualToString:map]){
             NSString *url = @"%@map/direction?origin={{我的位置}&destination=latlng:%f,%f|name=目的地&mode=driving&coord_type=gcj02";
             [self openMapUrl:[NSString stringWithFormat:url, SCHEME_MAP_BAIDU, location.latitude, location.longitude]];
