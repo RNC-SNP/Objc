@@ -16,4 +16,6 @@
 
 -(void)moveToUserLocation;
 
+-(void)takeSnapshot:(void(^)(UIImage*))handler;
+
 @end

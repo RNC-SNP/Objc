@@ -84,6 +84,17 @@
     }
 }
 
+-(void)takeSnapshot:(void(^)(UIImage*))handler {
+    MKMapSnapshotOptions *options = [MKMapSnapshotOptions new];
+    options.region = _mapView.region;
+    options.size = _mapView.frame.size;
+    options.scale = [[UIScreen mainScreen]scale];
+    MKMapSnapshotter *snapshotter = [[MKMapSnapshotter alloc]initWithOptions:options];
+    [snapshotter startWithCompletionHandler:^(MKMapSnapshot *snapshot, NSError *error) {
+        handler(error ? nil : snapshot.image);
+    }];
+}
+
 -(void)naviAction:(UIButton*)sender {
     Annotation *annotation = _annotations[sender.tag];
     NSArray *maps = [MapUtil supportedMaps];
