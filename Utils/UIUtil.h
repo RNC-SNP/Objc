@@ -15,11 +15,9 @@
 
 #define SetTextSize(l,s) [l setFont:[UIFont systemFontOfSize:s]]
 
-#define SetClickCallback(v,sel) [v addTarget:self action:sel \
-forControlEvents:UIControlEventTouchUpInside]
+#define SetClickCallback(v,sel) [v addTarget:self action:sel forControlEvents:UIControlEventTouchUpInside]
 
-#define SetTapCallback(v,sel) [v addGestureRecognizer:\
-[[UITapGestureRecognizer alloc]initWithTarget:self action:sel]]
+#define SetTapCallback(v,sel) [v addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:sel]]
 
 #define kSCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 
