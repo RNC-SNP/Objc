@@ -127,11 +127,13 @@
                     [overlays addObject:[route polyline]];
                 }
                 [_routesDict setObject:overlays forKey:ID];
+                SetTitleNormal(sender, @"隐藏路线");
             }
         }];
     } else {
         [_mapView removeOverlays:[_routesDict objectForKey:ID]];
         [_routesDict removeObjectForKey:ID];
+        SetTitleNormal(sender, @"显示路线");
     }
 }
 
@@ -180,8 +182,9 @@
         annotationView.canShowCallout = YES;
         annotationView.draggable = NO;
         
-        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 31, 30)];
-        SetTitleNormal(btn, @"路线");
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 45)];
+        btn.titleLabel.numberOfLines = 2;
+        SetTitleNormal(btn, @"显示路线");
         SetTitleColorNormal(btn, self.tintColor);
         SetClickCallback(btn, @selector(routesAction:));
         SetTextSize(btn.titleLabel, 15);
