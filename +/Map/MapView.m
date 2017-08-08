@@ -181,12 +181,12 @@
         annotationView.canShowCallout = YES;
         annotationView.draggable = NO;
         
-        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 45)];
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 36, 40)];
         btn.titleLabel.numberOfLines = 2;
         SetTitleNormal(btn, @"显示路线");
         SetTitleColorNormal(btn, self.tintColor);
         SetClickCallback(btn, @selector(routesAction:));
-        SetTextSize(btn.titleLabel, 15);
+        SetTextSize(btn.titleLabel, 13);
         [btn setTag:[_annotations indexOfObject:annotation]];
         annotationView.rightCalloutAccessoryView = btn;
         
