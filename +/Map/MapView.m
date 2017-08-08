@@ -1,7 +1,6 @@
 #import "MapView.h"
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
-#import "MapUtil.h"
 #import "UIAlertController+Window.h"
 #import "UIUtil.h"
 
@@ -9,6 +8,8 @@
 
 @property (nonatomic) CLLocationCoordinate2D coordinate;
 @property (nonatomic,copy) NSString *title, *subTitle;
+
+-(NSString*)Id;
 
 @end
 
@@ -22,13 +23,18 @@
     return annotation;
 }
 
+-(NSString*)Id {
+    return [NSString stringWithFormat:@"%f_%f_%@_%@", _coordinate.latitude, _coordinate.longitude, _title, _subTitle];
+}
+
 @end
 
 @interface MapView()<MKMapViewDelegate>
 
 @property (nonatomic,strong) MKMapView *mapView;
 @property (nonatomic,strong) MKUserLocation* userLocation;
-@property (nonatomic,copy) NSMutableArray<Annotation*>* annotations;
+@property (nonatomic,strong) NSMutableArray<Annotation*>* annotations;
+@property (nonatomic,strong) NSMutableDictionary *routesDict;
 
 @end
 
@@ -48,6 +54,7 @@
         _mapView.delegate = self;
         [self addSubview:_mapView];
         _annotations = [NSMutableArray new];
+        _routesDict = [NSMutableDictionary new];
     }
     return self;
 }
@@ -74,13 +81,17 @@
     if ([_annotations containsObject:annotation]) {
         [_mapView removeAnnotation:annotation];
         [_annotations removeObject:annotation];
+        NSString *ID = [annotation Id];
+        if ([_routesDict objectForKey:ID] != nil) {
+            [_routesDict removeObjectForKey:ID];
+        }
     }
 }
 
 -(void)moveToUserLocation {
     if (_userLocation != nil) {
         CLLocationCoordinate2D loc = _userLocation.location.coordinate;
-        [self setCenterLatitude:loc.latitude Longitude:loc.longitude RegionSpan:0.015];
+        [self setCenterLatitude:loc.latitude Longitude:loc.longitude RegionSpan:0.001];
     }
 }
 
@@ -95,37 +106,38 @@
     }];
 }
 
--(void)naviAction:(UIButton*)sender {
+-(void)routesAction:(UIButton*)sender {
     Annotation *annotation = _annotations[sender.tag];
-    NSArray *maps = [MapUtil supportedMaps];
-    if (maps.count > 1) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"选择地图开始导航" preferredStyle:UIAlertControllerStyleActionSheet];
-        for (NSString* map in maps) {
-            [alertController addAction:[UIAlertAction actionWithTitle:[self MapName:map] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                [MapUtil navigateToLocation:annotation.coordinate Title:annotation.title Map:map];
-            }]];
-        }
-        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-        [alertController show:YES];
+    NSString *ID = [annotation Id];
+    if ([_routesDict objectForKey:ID] == nil) {
+        MKDirectionsRequest *request = [MKDirectionsRequest new];
+        request.source = [self mapItemFromLocation:_userLocation.location.coordinate];
+        request.destination = [self mapItemFromLocation:annotation.coordinate];
+        MKDirections *directions = [[MKDirections alloc]initWithRequest:request];
+        [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error) {
+            if (!error) {
+                [response.routes enumerateObjectsUsingBlock:^(MKRoute *obj, NSUInteger idx, BOOL *stop) {
+                    [obj.steps enumerateObjectsUsingBlock:^(MKRouteStep *obj, NSUInteger idx, BOOL *stop) {
+                        NSLog(@"%@", obj.instructions);
+                    }];
+                }];
+                NSMutableArray *overlays = [NSMutableArray new];
+                for (MKRoute *route in [response routes]) {
+                    [_mapView addOverlay:[route polyline] level:MKOverlayLevelAboveRoads];
+                    [overlays addObject:[route polyline]];
+                }
+                [_routesDict setObject:overlays forKey:ID];
+            }
+        }];
     } else {
-        [MapUtil navigateToLocation:annotation.coordinate Title:annotation.title Map:MAP_DEFAULT];
+        [_mapView removeOverlays:[_routesDict objectForKey:ID]];
+        [_routesDict removeObjectForKey:ID];
     }
 }
 
--(NSString*)MapName:(NSString*)map {
-    if ([map isEqualToString:MAP_DEFAULT]) {
-        return @"系统地图";
-    } else if ([map isEqualToString:MAP_TENCENT]) {
-        return @"腾讯地图";
-    } else if ([map isEqualToString:MAP_GOOGLE]) {
-        return @"谷歌地图";
-    } else if ([map isEqualToString:MAP_GAODE]) {
-        return @"高德地图";
-    } else if ([map isEqualToString:MAP_BAIDU]) {
-        return @"百度地图";
-    } else {
-        return @"";
-    }
+-(MKMapItem*)mapItemFromLocation:(CLLocationCoordinate2D)location {
+    MKPlacemark *placemark = [[MKPlacemark alloc]initWithCoordinate:location addressDictionary:nil];
+    return [[MKMapItem alloc]initWithPlacemark:placemark];
 }
 
 #pragma mark MKMapViewDelegate
@@ -155,22 +167,23 @@
 }
 
 -(MKAnnotationView*)mapView:(MKMapView*)mapView viewForAnnotation:(Annotation*)annotation {
-    NSString *annotationID = [NSString stringWithFormat:@"%f_%f_%@", annotation.coordinate.latitude, annotation.coordinate.longitude, annotation.title];
-    MKAnnotationView *annotationView = (MKAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:annotationID];
-    if (!annotationView) {
-        annotationView = [[MKPinAnnotationView alloc]initWithAnnotation:nil reuseIdentifier:annotationID];
-    }
-    annotationView.annotation = annotation;
-    annotationView.canShowCallout = YES;
-    annotationView.draggable = NO;
-    
-    CLLocationCoordinate2D currentLoc = annotation.coordinate;
-    CLLocationCoordinate2D userLoc = _userLocation.location.coordinate;
-    if (currentLoc.latitude != userLoc.latitude && currentLoc.longitude != userLoc.longitude) {
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        return nil;
+    } else {
+        NSString *annotationId = [annotation Id];
+        MKAnnotationView *annotationView = (MKAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:annotationId];
+        if (!annotationView) {
+            annotationView = [[MKPinAnnotationView alloc]initWithAnnotation:nil reuseIdentifier:annotationId];
+        }
+        
+        annotationView.annotation = annotation;
+        annotationView.canShowCallout = YES;
+        annotationView.draggable = NO;
+        
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 31, 30)];
-        SetTitleNormal(btn, @"导航");
+        SetTitleNormal(btn, @"路线");
         SetTitleColorNormal(btn, self.tintColor);
-        SetClickCallback(btn, @selector(naviAction:));
+        SetClickCallback(btn, @selector(routesAction:));
         SetTextSize(btn.titleLabel, 15);
         [btn setTag:[_annotations indexOfObject:annotation]];
         annotationView.rightCalloutAccessoryView = btn;
@@ -178,9 +191,9 @@
         UILabel *label = [UIUtil LabelFromFrame:CGRectZero Color:[UIColor grayColor] Size:10];
         label.text = annotation.subTitle;
         annotationView.detailCalloutAccessoryView = label;
+        
+        return annotationView;
     }
-    
-    return annotationView;
 }
 
 -(void)mapView:(MKMapView*)mapView didSelectAnnotationView:(MKAnnotationView*)view {
@@ -189,6 +202,16 @@
 
 -(void)mapView:(MKMapView*)mapView didDeselectAnnotationView:(MKAnnotationView*)view {
     
+}
+
+-(MKOverlayRenderer*)mapView:(MKMapView*)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+    if ([overlay isKindOfClass:[MKPolyline class]]) {
+        MKPolylineRenderer *lineRenderer = [[MKPolylineRenderer alloc]initWithOverlay:overlay];
+        lineRenderer.lineWidth = 5;
+        lineRenderer.strokeColor = [UIColor yellowColor];
+        return lineRenderer;
+    }
+    return nil;
 }
 
 @end
