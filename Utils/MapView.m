@@ -77,6 +77,13 @@
     }
 }
 
+-(void)moveToUserLocation {
+    if (_userLocation != nil) {
+        CLLocationCoordinate2D loc = _userLocation.location.coordinate;
+        [self setCenterLatitude:loc.latitude Longitude:loc.longitude RegionSpan:0.015];
+    }
+}
+
 -(void)naviAction:(UIButton*)sender {
     Annotation *annotation = _annotations[sender.tag];
     NSArray *maps = [MapUtil supportedMaps];
@@ -137,7 +144,7 @@
 }
 
 -(MKAnnotationView*)mapView:(MKMapView*)mapView viewForAnnotation:(Annotation*)annotation {
-    NSString *annotationID = [NSString stringWithFormat:@"%f_%f_%@_%@", annotation.coordinate.latitude, annotation.coordinate.longitude, annotation.title, annotation.subTitle];
+    NSString *annotationID = [NSString stringWithFormat:@"%f_%f_%@", annotation.coordinate.latitude, annotation.coordinate.longitude, annotation.title];
     MKAnnotationView *annotationView = (MKAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:annotationID];
     if (!annotationView) {
         annotationView = [[MKPinAnnotationView alloc]initWithAnnotation:nil reuseIdentifier:annotationID];
