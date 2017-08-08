@@ -13,6 +13,8 @@
 
 #define SetTitleNormal(v,title) [v setTitle:title forState:UIControlStateNormal]
 
+#define SetTextSize(l,s) [l setFont:[UIFont systemFontOfSize:s]]
+
 #define SetClickCallback(v,sel) [v addTarget:self action:sel \
 forControlEvents:UIControlEventTouchUpInside]
 
