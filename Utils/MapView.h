@@ -14,4 +14,6 @@
 
 -(void)removeAnnotation:(Annotation*)Annotation;
 
+-(void)moveToUserLocation;
+
 @end
