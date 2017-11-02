@@ -60,6 +60,7 @@ static Toast *instance;
 
 -(void)showText:(NSString*)text {
     [self showText:text Duration:2.0];
+    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self];
 }
 
 -(void)animDismiss {
