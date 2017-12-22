@@ -13,17 +13,22 @@ compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 @implementation StreamAudioPlayer
 
--(instancetype)initWithUrl:(NSString*)url {
-    if (self = [super init]) {
-        _player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:url]];
+-(instancetype)init {
+    if (self == [super init]) {
+        _player = [AVPlayer new];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didFinishPlaying)
                                                      name:AVPlayerItemDidPlayToEndTimeNotification
                                                    object:[_player currentItem]];
         [_player addObserver:self forKeyPath:@"status" options:0 context:nil];
-        _status = STREAM_AUDIO_PLAYER_STATUS_INIT;
     }
     return self;
+}
+
+-(void)loadUrl:(NSString*)url {
+    AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:url]];
+    [_player replaceCurrentItemWithPlayerItem:playerItem];
+    _status = StreamAudioPlayerStatusInit;
 }
 
 -(void)start {
