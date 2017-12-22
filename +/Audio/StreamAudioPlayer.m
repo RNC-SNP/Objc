@@ -26,9 +26,11 @@ compare:v options:NSNumericSearch] != NSOrderedAscending)
 }
 
 -(void)loadUrl:(NSString*)url {
-    AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:url]];
-    [_player replaceCurrentItemWithPlayerItem:playerItem];
-    _status = StreamAudioPlayerStatusInit;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:url]];
+        [_player replaceCurrentItemWithPlayerItem:playerItem];
+        _status = StreamAudioPlayerStatusInit;
+    });
 }
 
 -(void)start {
