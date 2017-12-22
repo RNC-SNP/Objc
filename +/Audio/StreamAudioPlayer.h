@@ -28,7 +28,7 @@ typedef enum Status {
     STREAM_AUDIO_PLAYER_STATUS_PLAYING,
     STREAM_AUDIO_PLAYER_STATUS_PAUSED,
     STREAM_AUDIO_PLAYER_STATUS_FINISHED,
-    STREAM_AUDIO_PLAYER_STATUS_DESTROYED
+    STREAM_AUDIO_PLAYER_STATUS_CANCELED
 }StreamAudioPlayerStatus;
 
 @property (nonatomic,weak) id<StreamAudioPlayerDelegate> delegate;
