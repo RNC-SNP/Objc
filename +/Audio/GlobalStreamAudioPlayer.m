@@ -101,7 +101,6 @@ NSString* const ACTION_FINISHED = @"ACTION_FINISHED";
             //TODO
         }
     } else {
-        //[_player destroy];
         [self notifyAction:ACTION_CANCELED];
         _currentGroupId = groupId;
         _currentItemIndex = itemIndex;
@@ -233,7 +232,7 @@ NSString* const ACTION_FINISHED = @"ACTION_FINISHED";
 
 -(void)destroy {
     if (_player != nil && [_player status] == StreamAudioPlayerStatusPlaying) {
-        [_player pause];
+        [_player destroy];
         _player = nil;
     }
     if ([_audioInfoDict count] > 0) {
