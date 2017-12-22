@@ -34,7 +34,7 @@ typedef enum Status {
 @property (nonatomic,weak) id<StreamAudioPlayerDelegate> delegate;
 @property (nonatomic,assign) BOOL loop;
 
--(instancetype)initWithUrl:(NSString*)url;
+-(void)loadUrl:(NSString*)url;
 
 -(void)start;
 
