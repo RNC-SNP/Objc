@@ -23,7 +23,7 @@ NSString* const ACTION_STARTED = @"ACTION_STARTED";
 NSString* const ACTION_PAUSED = @"ACTION_PAUSED";
 NSString* const ACTION_RESUMED = @"ACTION_RESUMED";
 NSString* const ACTION_RESTARTED = @"ACTION_RESTARTED";
-NSString* const ACTION_DESTROYED = @"ACTION_DESTROYED";
+NSString* const ACTION_DESTROYED = @"ACTION_CANCELED";
 NSString* const ACTION_FAILED = @"ACTION_FAILED";
 NSString* const ACTION_PREPARING = @"ACTION_PREPARING";
 NSString* const ACTION_PREPARED = @"ACTION_PREPARED";
@@ -54,6 +54,8 @@ NSString* const ACTION_FINISHED = @"ACTION_FINISHED";
         [_session setMode:AVAudioSessionModeDefault error:nil];
         [_session setActive:YES error:nil];
         
+        _player = [StreamAudioPlayer new];
+        
         [self observeAudioSessionNotification:AVAudioSessionInterruptionNotification Selector:@selector(handleAudioSessionInterruption:)];
         [self observeAudioSessionNotification:AVAudioSessionRouteChangeNotification Selector:@selector(handleAudioSessionRouteChanged:)];
         [self observeAudioSessionNotification:AVAudioSessionMediaServicesWereResetNotification Selector:@selector(handleAudioSessionMediaServicesReset:)];
@@ -81,41 +83,32 @@ NSString* const ACTION_FINISHED = @"ACTION_FINISHED";
 -(void)clickAtGroupId:(NSInteger)groupId ItemIndex:(NSInteger)itemIndex {
     NSMutableArray* array = [_audioInfoDict valueForKey:[self keyWithGroupId:groupId]];
     StreamAudioInfo* audioInfo = [array objectAtIndex:itemIndex];
-    if (_player == nil) {
+    if (_currentGroupId == groupId && _currentItemIndex == itemIndex) {
+        StreamAudioPlayerStatus status = [_player status];
+        if (status == StreamAudioPlayerStatusInit) {
+            [_player start];
+            [self notifyAction:ACTION_STARTED];
+        } else if (status == StreamAudioPlayerStatusPreparing || status == StreamAudioPlayerStatusPlaying) {
+            [_player pause];
+            [self notifyAction:ACTION_PAUSED];
+        } else if (status == StreamAudioPlayerStatusPaused) {
+            [_player resume];
+            [self notifyAction:ACTION_RESUMED];
+        } else if (status == StreamAudioPlayerStatusFinished) {
+            [_player restart];
+            [self notifyAction:ACTION_RESTARTED];
+        } else if (status == StreamAudioPlayerStatusError) {
+            //TODO
+        }
+    } else {
+        //[_player destroy];
+        [self notifyAction:ACTION_CANCELED];
         _currentGroupId = groupId;
         _currentItemIndex = itemIndex;
-        _player = [[StreamAudioPlayer alloc]initWithUrl:audioInfo.sourceUrl];
+        [_player loadUrl:audioInfo.sourceUrl];
         _player.delegate = self;
         [_player start];
         [self notifyAction:ACTION_STARTED];
-    } else {
-        if (_currentGroupId == groupId && _currentItemIndex == itemIndex) {
-            StreamAudioPlayerStatus status = [_player status];
-            if (status == StreamAudioPlayerStatusInit) {
-                [_player start];
-                [self notifyAction:ACTION_STARTED];
-            } else if (status == StreamAudioPlayerStatusPreparing || status == StreamAudioPlayerStatusPlaying) {
-                [_player pause];
-                [self notifyAction:ACTION_PAUSED];
-            } else if (status == StreamAudioPlayerStatusPaused) {
-                [_player resume];
-                [self notifyAction:ACTION_RESUMED];
-            } else if (status == StreamAudioPlayerStatusFinished) {
-                [_player restart];
-                [self notifyAction:ACTION_RESTARTED];
-            } else if (status == StreamAudioPlayerStatusError) {
-                //TODO
-            }
-        } else {
-            [_player destroy];
-            [self notifyAction:ACTION_DESTROYED];
-            _currentGroupId = groupId;
-            _currentItemIndex = itemIndex;
-            _player = [[StreamAudioPlayer alloc]initWithUrl:audioInfo.sourceUrl];
-            _player.delegate = self;
-            [_player start];
-            [self notifyAction:ACTION_STARTED];
-        }
     }
 }
 
